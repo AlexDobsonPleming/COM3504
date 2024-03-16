@@ -1,7 +1,6 @@
 import Plant from "../models/plants.mjs";
-export default class PlantsService {
+export async function get_all() {
+    let existing_plants = await Plant.find({});
 
-    async get_all() {
-        let existing_plants = await Plant.find({});
-    }
+    return existing_plants;
 }

@@ -19,4 +19,4 @@ mongoose.connect(connectionString).then(result => {
     console.log("Connection Failed!", err);
 });
 
-export {connection, connectionString};
+export {connection, mongoose};

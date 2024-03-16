@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><Plants</title>
+    <title>Plants</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
 <h1>Plants</h1>
+<h2><%= plants.length %> entries</h2>
 
-</form>
+<% for(var i = 0; i < plants.length; i++) { %>
+    <div>
+        <% const plant = plants[i]%>
+        <p><%= plant.plant_name %></p>
+        <p><%= plant.identify_status %></p>
+        <p><%= plant.description %></p>
+        <p><%= plant.date_time_seen %></p>
+        <p><%= plant.plant_width %></p>
+        <p><%= plant.plant_height %></p>
+        <p><%= plant.plant_location %></p>
+        <p><%= plant.has_flowers %></p>
+        <p><%= plant.has_leaves %></p>
+        <p><%= plant.has_fruit %></p>
+        <p><%= plant.has_seeds %></p>
+        <p><%= plant.sun_exposure %></p>
+        <% console.log(plant.plant_colour.colour_r) %>
+        <p style="background-color:rgb(<%= plant_colour.colour_r %>, <%= plant_colour.colour_g %>, <%= plant_colour.colour_b %>);">Plant Colour</p>
+        <p><%= plant.comments %></p>
+        <img src=<%= plant.img %> alt=<%= plant.plant_name %> />
+
+
+    </div>
+<% } %>
+
 </body>
 </html>
