@@ -15,7 +15,8 @@ const plants = [
         has_fruit: false,
         has_seeds: true,
         sun_exposure: "Full sun",
-        plant_colour: {colour_r: 204, colour_g: 0, colour_b: 102},
+        plant_colour: {r: 0, g: 255, b: 0},
+        flower_colour: {r: 204, g: 0, b: 102},
         comments: [
             "whenever I come home for summer I always manage to miss the flower season and have to deal with defusing these irritating critters!",
             "I know! - they're such a pain because if you cut them wrong all their seeds blow away and it means you have to trim 20x as many next year",

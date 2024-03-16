@@ -9,24 +9,40 @@
 <h2><%= plants.length %> entries</h2>
 
 <% for(var i = 0; i < plants.length; i++) { %>
-    <div>
         <% const plant = plants[i]%>
         <p><%= plant.plant_name %></p>
         <p><%= plant.identify_status %></p>
-        <p><%= plant.description %></p>
-        <p><%= plant.date_time_seen %></p>
-        <p><%= plant.plant_width %></p>
-        <p><%= plant.plant_height %></p>
-        <p><%= plant.plant_location %></p>
-        <p><%= plant.has_flowers %></p>
-        <p><%= plant.has_leaves %></p>
-        <p><%= plant.has_fruit %></p>
-        <p><%= plant.has_seeds %></p>
-        <p><%= plant.sun_exposure %></p>
-        <% console.log(plant.plant_colour.colour_r) %>
-        <p style="background-color:rgb(<%= plant_colour.colour_r %>, <%= plant_colour.colour_g %>, <%= plant_colour.colour_b %>);">Plant Colour</p>
-        <p><%= plant.comments %></p>
+        <p>Description: <%= plant.description %></p>
         <img src=<%= plant.img %> alt=<%= plant.plant_name %> />
+        <p><%= plant.date_time_seen %></p>
+        <p>Plant width: <%= plant.plant_width %>cm</p>
+        <p>Plant height: <%= plant.plant_height %>cm</p>
+        <p><%= plant.plant_location.lat %></p>
+        <p><%= plant.plant_location.long %></p>
+        <iframe
+                width="300"
+                height="170"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+                src="https://maps.google.com/maps?q=<%= plant.plant_location.lat %>,<%= plant.plant_location.long %>&hl=es&z=14&amp;output=embed"
+        >
+        </iframe>
+        <p>Has flowers <input type="checkbox" checked="<%= plant.has_leaves %>" disabled="disabled"></p>
+        <p>Has fruit  <input type="checkbox" checked="<%= plant.has_fruit %>" disabled="disabled"></p>
+        <p>Has seeds  <input type="checkbox" checked="<%= plant.has_seeds %>" disabled="disabled"></p>
+        <p><%= plant.sun_exposure %></p>
+        <% const plant_colour = plant.plant_colour %>
+        <p style="background-color:rgb(<%= plant_colour.r %>, <%= plant_colour.g %>, <%= plant_colour.b %>);">Plant Colour</p>
+        <% const flower_colour = plant.flower_colour %>
+        <p style="background-color:rgb(<%= flower_colour.r %>, <%= flower_colour.g %>, <%= flower_colour.b %>);">Flower Colour</p>
+        <h3>Comments</h3>
+        <%  for (let comment of plant.comments){ %>
+            <p><%= comment %></p>
+        <% }%>
+
+
 
 
     </div>
