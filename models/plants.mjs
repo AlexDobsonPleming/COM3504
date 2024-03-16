@@ -1,5 +1,5 @@
 // import mongoose from "mongoose";
-import {connection, mongoose} from "../databases/plants.mjs";
+import {mongoose} from "../databases/plants.mjs";
 
 // Get the Schema class from mongoose
 let Schema = mongoose.Schema;
