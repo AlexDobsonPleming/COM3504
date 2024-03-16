@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 // Define the MongoDB connection URL, including
 // the database name ('users' in this case)
-const mongoDB = 'mongodb://localhost:27017/plantSightings';
+const connectionString = 'mongodb://localhost:27017/plantSightings';
 let connection;
 
 // Set Mongoose to use the global Promise library
 mongoose.Promise = global.Promise;
 
 // Connect to the MongoDB server
-mongoose.connect(mongoDB).then(result => {
+mongoose.connect(connectionString).then(result => {
     // Store the connection instance for later use if needed
     connection = result.connection;
     // Log a success message if the connection is established
@@ -19,3 +19,4 @@ mongoose.connect(mongoDB).then(result => {
     console.log("Connection Failed!", err);
 });
 
+export {connection, connectionString};

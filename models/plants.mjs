@@ -1,4 +1,4 @@
-let mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 // Get the Schema class from mongoose
 let Schema = mongoose.Schema;
@@ -49,5 +49,5 @@ PlantSchema.set('toObject', { getters: true, virtuals: true });
 let Plant = mongoose.model('plant', PlantSchema);
 
 // Export the plants model for use in other modules
-module.exports = Plant;
+export default Plant;
 
