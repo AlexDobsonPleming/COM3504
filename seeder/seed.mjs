@@ -6,7 +6,7 @@ import {mongoose} from "../databases/plants.mjs";
 const plants = [
     new Plant({
         plant_name: "Dandelion",
-        identify_status: "In-Progress",
+        identify_status: "Completed",
         description: "Garden variety pest",
         date_time_seen: new Date(2007, 2, 15),
         plant_width: 1.5,
@@ -29,7 +29,7 @@ const plants = [
     }),
     new Plant({
         plant_name: "Tulip",
-        identify_status: "Completed",
+        identify_status: "In-Progress",
         description: "Tulips are spring-blooming perennial herbaceous bulbiferous geophytes in the Tulipa genus. Their flowers are usually large, showy, and brightly coloured, generally red, orange, pink, yellow, or white. They often have a different coloured blotch at the base of the tepals, internally.",
         date_time_seen: new Date(2013, 7, 25),
         plant_width: 0.75,

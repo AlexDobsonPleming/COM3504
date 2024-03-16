@@ -8,9 +8,27 @@
 <h1>Plants</h1>
 <h2><%= plants.length %> entries</h2>
 
+<div id="searchPanel">
+        <input type="radio" id="datetime" name="sort_heuristic" value="HTML">
+        <label for="datetime">Sort by date time</label><br>
+        <input type="radio" id="identification" name="sort_heuristic" value="CSS">
+        <label for="identification">Sort by identification status</label><br>
+        <input type="radio" id="distance" name="sort_heuristic" value="JavaScript">
+        <label for="distance">Sort by distance (WIP!)</label>
+</div>
+
+<div id="searchResults">
 <% for(var i = 0; i < plants.length; i++) { %>
         <% const plant = plants[i]%>
-        <p><%= plant.plant_name %></p>
+        <div
+                class="searchEntry"
+                data-datetime="<%= plant.date_time_seen %>"
+                data-identification="<%= plant.identify_status %>"
+                data-lat="<%= plant.plant_location.lat %>"
+                data-long="<%= plant.plant_location.long %>"
+        >
+
+        <h2><%= plant.plant_name %></h2>
         <p><%= plant.identify_status %></p>
         <p>Description: <%= plant.description %></p>
         <img src=<%= plant.img %> alt=<%= plant.plant_name %> />
@@ -41,12 +59,13 @@
         <%  for (let comment of plant.comments){ %>
             <p><%= comment %></p>
         <% }%>
+        </div>
 
 
 
 
-    </div>
 <% } %>
-
+</div>
+<script src="/javascripts/search.js"></script>
 </body>
 </html>

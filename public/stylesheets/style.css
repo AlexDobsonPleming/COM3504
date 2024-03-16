@@ -16,3 +16,8 @@ a {
   bottom: 10px;
   width: 90%;
 }
+
+#searchResults {
+  display:flex;
+  flex-direction: column;
+}
