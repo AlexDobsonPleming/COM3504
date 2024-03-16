@@ -22,7 +22,7 @@ let PlantSchema = new Schema(
 
         plant_height: { type: Number },
 
-        plant_location: [{ lat: Number, long: Number}],
+        plant_location: { lat: Number, long: Number},
 
         has_flowers: {type: Boolean},
 
@@ -34,7 +34,9 @@ let PlantSchema = new Schema(
 
         sun_exposure: {type: String, enum: ['Full sun', 'Partial shade', 'Full shade']},
 
-        plant_colour: [{colour_r: Number, colour_g: Number, colour_b: Number}],
+        plant_colour: {r: Number, g: Number, b: Number},
+
+        flower_colour: {r: Number, g: Number, b: Number},
 
         comments: [{type: String }],
 
