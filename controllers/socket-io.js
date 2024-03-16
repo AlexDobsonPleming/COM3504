@@ -1,5 +1,5 @@
 
-exports.init = function(io) {
+export default function(io) {
   io.sockets.on('connection', function (socket) {
     console.log("try");
     try {

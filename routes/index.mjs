@@ -2,6 +2,7 @@ import express from "express";
 var router = express.Router();
 import plants from "../models/plants.mjs";
 import multer from "multer";
+import plants_service from "../services/plants.js";
 
 // storage defines the storage options to be used for file upload with multer
 var storage = multer.diskStorage({
@@ -35,7 +36,7 @@ router.post('/add', upload.single('myImg'), function (req, res, next) {
   res.redirect('/');
 });
 
-router.post('/plants', function (req, res, next) {
+router.get('/plants', function (req, res, next) {
   res.render('plants');
 });
 

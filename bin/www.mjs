@@ -5,9 +5,7 @@
  */
 import app from "../app.mjs";
 import http from "http";
-import {connection as database} from "../databases/plants.mjs";
 import { Server as SocketServer } from "socket.io";
-// var socket_module = require('../controllers/socket-io');
 import socket_module from "../controllers/socket-io.js";
 
 
@@ -102,4 +100,4 @@ const io = new SocketServer(server, {
   pingTimeout: 60000,
 });
 
-socket_module.init(io, app);
+socket_module(io, app);
