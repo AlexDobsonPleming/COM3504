@@ -1,5 +1,5 @@
 // Import the plants model
-const plantModel = require('../models/plants.mjs');
+import plantModel from "../models/plants.mjs";
 
 // Function to create new plants
 exports.create = function (plantData, filePath) {

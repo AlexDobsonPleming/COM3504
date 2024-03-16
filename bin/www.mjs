@@ -3,12 +3,12 @@
 /**
  * Module dependencies.
  */
-
-var app = require('../app');
-
-var http = require('http');
-
-var database= require('../databases/plants.mjs')
+import app from "../app.mjs";
+import http from "http";
+import {connection as database} from "../databases/plants.mjs";
+import { Server as SocketServer } from "socket.io";
+// var socket_module = require('../controllers/socket-io');
+import socket_module from "../controllers/socket-io.js";
 
 
 /**
@@ -98,9 +98,8 @@ function onListening() {
 // increase in pingTimeout is required according to https://github.com/socketio/socket.io/issues/3259
 // a default of 5000 makes disconnection very frequent
 
-
-const io = require('socket.io')(server, {
+const io = new SocketServer(server, {
   pingTimeout: 60000,
 });
-var socket_module = require('../controllers/socket-io');
+
 socket_module.init(io, app);
