@@ -41,4 +41,9 @@ router.get('/plants', async function (req, res, next) {
   res.render('plants', { plants: plants });
 });
 
+router.get('/API/plants', async function(req, res) {
+  const plants = await get_plants();
+  res.send(plants);
+});
+
 export default router;
