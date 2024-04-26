@@ -27,15 +27,14 @@ router.post('/add', upload.single('myImg'), function (req, res, next) {
       date_time_seen,
       plant_width,
       plant_height,
-      plant_lat,
-      plant_long,
+      latitude,
+      longitude,
       has_flowers,
       has_leaves,
       has_fruit,
       has_seeds,
       sun_exposure,
       plant_colour,
-      comments,
   } = req.body;
   var imageBase64 = req.file.buffer.toString("base64");
 
