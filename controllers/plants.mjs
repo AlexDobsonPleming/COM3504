@@ -2,7 +2,7 @@
 import plantModel from "../models/plants.mjs";
 
 // Function to create new plants
-exports.create = function (plantData, filePath) {
+exports.create = function (plantData, imgData) {
     // Create a new plant instance using the provided plant data
     let plant = new plantModel({
         plant_name: plantData.plant_name,
@@ -26,7 +26,7 @@ exports.create = function (plantData, filePath) {
             b: plantData.colour_b
         },
         comments: plantData.comments,
-        img: filePath
+        img: imgData
     });
 
     // Save the plant to the database and handle success or failure

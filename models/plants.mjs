@@ -9,6 +9,7 @@ let PlantSchema = new Schema(
     {
         // Define the plant_name field with type String, not required,
         // and max length of 200 characters
+        user_name: { type: String, required: true, max: 50},
         plant_name: { type: String, required: false, max: 200 },
         // Define the status field with type enum, required,
         // and max length of 100 characters
@@ -40,7 +41,7 @@ let PlantSchema = new Schema(
 
         comments: [{type: String }],
 
-        img: {type: String }
+        img: {type: String}
     }
 );
 
