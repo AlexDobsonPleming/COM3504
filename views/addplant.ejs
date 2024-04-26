@@ -39,6 +39,19 @@
     <label for="longitude">Longitude:</label>
     <input type="number" id="longitude" name="plant_long" step="any" required><br><br>
 
+    <button onclick="getLocation();">Location</button>
+    <script>
+        function getLocation()
+        {
+            navigator.geolocation.getCurrentPosition(function(position)
+            {
+                var coordinates = position.coords;
+                document.getElementById('latitude').value = coordinates.latitude;
+                document.getElementById('longitude').value = coordinates.longitude;
+            });
+        }
+     </script>
+
     <label for="hasFlowers">Has Flowers:</label>
     <input type="checkbox" id="hasFlowers" name="has_flowers" value="true"><br><br>
 
