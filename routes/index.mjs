@@ -31,9 +31,17 @@ router.get('/add', function(req, res, next) {
 
 router.post('/add', upload.single('myImg'), function (req, res, next) {
   let plantData = req.body;
-  var bitmap = fs.readFileSync(req.file);
-  var base64File = new Buffer(bitmap).toString('base64');
-  //let imageData = req.file.buffer.toString('base64');
+  //var bitmap = new Buffer(fs.readFileSync(req.file)).toString('base64');
+  var fileInfo = [];
+  for(var i = 0; i < req.files.length; i++) {
+    fileInfo.push({
+      "originalName": req.files[i].originalName,
+      "size": req.files[i].size,
+      "b64": new Buffer(fs.readFileSync(req.files[i].path)).toString("base64")
+    });
+    fs.unlink(req.files[i].path);
+  }
+  res.send(fileInfo);
   let result = plants.create(plantData, imageData);
   console.log(result);
   res.redirect('/');

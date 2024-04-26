@@ -34,10 +34,10 @@
     <input type="number" id="plantHeight" name="plant_height" required><br><br>
 
     <label for="latitude">Latitude:</label>
-    <input type="number" id="latitude" name="plant_location[lat]" step="any" required><br><br>
+    <input type="number" id="latitude" name="plant_lat" step="any" required><br><br>
 
     <label for="longitude">Longitude:</label>
-    <input type="number" id="longitude" name="plant_location[long]" step="any" required><br><br>
+    <input type="number" id="longitude" name="plant_long" step="any" required><br><br>
 
     <label for="hasFlowers">Has Flowers:</label>
     <input type="checkbox" id="hasFlowers" name="has_flowers" value="true"><br><br>
@@ -59,14 +59,8 @@
     </select>
     <br><br>
 
-    <label for="plantColourR">Plant Colour (R):</label>
-    <input type="text" id="plantColourR" name="plant_colour[colour_r]" required><br><br>
-
-    <label for="plantColourG">Plant Colour (G):</label>
-    <input type="text" id="plantColourG" name="plant_colour[colour_g]" required><br><br>
-
-    <label for="plantColourB">Plant Colour (B):</label>
-    <input type="text" id="plantColourB" name="plant_colour[colour_b]" required><br><br>
+    <label for="plantColour">Plant Colour :</label>
+    <input type="color" id="plantColour" name="plant_colour" value = "#07a639" required><br><br>
 
     <label for="comments">Comments:</label>
     <textarea id="comments" name="comments"></textarea><br><br>
