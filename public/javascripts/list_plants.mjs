@@ -56,7 +56,7 @@ function createPlantDetailedElement(plantData) {
     plantMapLocation.scrolling = "no";
     plantMapLocation.marginHeight = "0";
     plantMapLocation.marginWidth = "0";
-    plantMapLocation.src = `https://maps.google.com/maps?q=${plantData.plant_location.lat},${plantData.plant_location.long}&hl=es&z=14&output=embed`;
+    plantMapLocation.src = `https://maps.google.com/maps?q=${plantData.plant_location.lat},${plantData.plant_location.long}&hl=en&z=14&output=embed`;
     rootPlantDiv.appendChild(plantMapLocation);
     //TODO add offline detector and don't render iframe if offline
 
