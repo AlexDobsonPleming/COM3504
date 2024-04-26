@@ -2,6 +2,7 @@ import express from "express";
 var router = express.Router();
 import plants from "../models/plants.mjs";
 import multer from "multer";
+import fs from "fs";
 import {get_all as get_plants} from "../services/plants.js";
 
 // storage defines the storage options to be used for file upload with multer
@@ -13,7 +14,7 @@ var storage = multer.diskStorage({
     var original = file.originalname;
     var file_extension = original.split(".");
     // Make the file name the date + the file extension
-    filename =  Date.now() + '.' + file_extension[file_extension.length-1];
+    var filename =  Date.now() + '.' + file_extension[file_extension.length-1];
     cb(null, filename);
   }
 });
@@ -30,8 +31,10 @@ router.get('/add', function(req, res, next) {
 
 router.post('/add', upload.single('myImg'), function (req, res, next) {
   let plantData = req.body;
-  let filePath = req.file.path;
-  let result = plants.create(plantData, filePath);
+  var bitmap = fs.readFileSync(req.file);
+  var base64File = new Buffer(bitmap).toString('base64');
+  //let imageData = req.file.buffer.toString('base64');
+  let result = plants.create(plantData, imageData);
   console.log(result);
   res.redirect('/');
 });
