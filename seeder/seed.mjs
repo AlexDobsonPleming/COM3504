@@ -5,6 +5,7 @@ import {mongoose} from "../databases/plants.mjs";
 //create your array. i inserted only 1 object here
 const plants = [
     new Plant({
+        user_name: "Me",
         plant_name: "Dandelion",
         identify_status: "Completed",
         description: "Garden variety pest",
@@ -28,6 +29,7 @@ const plants = [
         //</editor-fold>
     }),
     new Plant({
+        user_name: "Me",
         plant_name: "Tulip",
         identify_status: "In-Progress",
         description: "Tulips are spring-blooming perennial herbaceous bulbiferous geophytes in the Tulipa genus. Their flowers are usually large, showy, and brightly coloured, generally red, orange, pink, yellow, or white. They often have a different coloured blotch at the base of the tepals, internally.",
@@ -48,6 +50,7 @@ const plants = [
         //</editor-fold>
     }),
     new Plant({
+        user_name: "Me",
         plant_name: "Bluebells",
         identify_status: "Completed",
         description: "Known in English as the common bluebell or simply bluebell, a name which is used in Scotland to refer to the harebell, Campanula rotundifolia. In spring, it produces a nodding, one-sided inflorescence of 5–12 tubular, sweet-scented violet–blue flowers, with strongly recurved tepals, and 3–6 long, linear, basal leaves. ",

@@ -4,21 +4,10 @@ import plants from "../models/plants.mjs";
 import multer from "multer";
 import fs from "fs";
 import {get_all as get_plants} from "../services/plants.js";
+import Plant from "../models/plants.mjs";
 
-// storage defines the storage options to be used for file upload with multer
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/images/uploads/');
-  },
-  filename: function (req, file, cb) {
-    var original = file.originalname;
-    var file_extension = original.split(".");
-    // Make the file name the date + the file extension
-    var filename =  Date.now() + '.' + file_extension[file_extension.length-1];
-    cb(null, filename);
-  }
-});
-let upload = multer({ storage: storage });
+
+let upload = multer();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -30,13 +19,47 @@ router.get('/add', function(req, res, next) {
 });
 
 router.post('/add', upload.single('myImg'), function (req, res, next) {
-  let plantData = req.body;
-  var bitmap = fs.readFileSync(req.file);
-  var base64File = new Buffer(bitmap).toString('base64');
-  //let imageData = req.file.buffer.toString('base64');
-  let result = plants.create(plantData, imageData);
-  console.log(result);
-  res.redirect('/');
+  let {
+      user_name,
+      plant_name,
+      description,
+      identify_status,
+      date_time_seen,
+      plant_width,
+      plant_height,
+      plant_lat,
+      plant_long,
+      has_flowers,
+      has_leaves,
+      has_fruit,
+      has_seeds,
+      sun_exposure,
+      plant_colour,
+      comments,
+  } = req.body;
+  var imageBase64 = req.file.buffer.toString("base64");
+
+  const newPlant = new Plant({
+        user_name: user_name,
+        plant_name: plant_name,
+        identify_status: identify_status,
+        description: description,
+        date_time_seen: date_time_seen,
+        plant_width: plant_width,
+        plant_height: plant_height,
+        plant_location: {lat: plant_lat, long: plant_long },
+        has_flowers: has_flowers,
+        has_fruit: has_fruit,
+        has_seeds: has_seeds,
+        sun_exposure: sun_exposure,
+        plant_colour: {r: 1, g: 50, b: 32},
+        flower_colour: {r: 162, g: 162, b: 208},
+        comments: [],
+        img: `data:image/jpeg;base64,${imageBase64}`
+    })
+
+  newPlant.save();
+  res.redirect('/plants');
 });
 
 router.get('/plants', async function (req, res, next) {
