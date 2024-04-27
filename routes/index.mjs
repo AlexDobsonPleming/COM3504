@@ -2,7 +2,6 @@ import express from "express";
 var router = express.Router();
 import plants from "../models/plants.mjs";
 import multer from "multer";
-import fs from "fs";
 import {get_all as get_plants} from "../services/plants.js";
 import Plant from "../models/plants.mjs";
 
@@ -54,7 +53,7 @@ router.post('/add', upload.single('myImg'), function (req, res, next) {
         date_time_seen: date_time_seen,
         plant_width: plant_width,
         plant_height: plant_height,
-        plant_location: {lat: plant_lat, long: plant_long },
+        plant_location: {lat: latitude, long: longitude },
         has_flowers: has_flowers,
         has_fruit: has_fruit,
         has_seeds: has_seeds,
@@ -70,7 +69,6 @@ router.post('/add', upload.single('myImg'), function (req, res, next) {
 });
 
 router.get('/plants', async function (req, res, next) {
-  const plants = await get_plants();
   res.render('plants', { plants: plants });
 });
 

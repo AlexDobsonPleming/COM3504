@@ -1,4 +1,5 @@
 "use strict";
+import {addPlant, reloadPlants, getPlants} from "./database.mjs";
 
 function createPlantDetailedElement(plantData) {
     const rootPlantDiv = document.createElement("div");
@@ -108,7 +109,13 @@ function createPlantListElement(plantData) {
 }
 
 async function load_page() {
-    const plants = await (await fetch("API/plants")).json();
+    const apiPlants = await (await fetch("API/plants")).json();
+
+    await reloadPlants(apiPlants);
+    const plants = await getPlants();
+
+    const plantCountElement = document.getElementById('plantEntriesCount');
+    plantCountElement.textContent = `${plants.length} plants`;
 
 
     const rootListElement = document.getElementById("searchResults");

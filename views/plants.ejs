@@ -2,11 +2,14 @@
 <html>
 <head>
     <title>Plants</title>
+
     <link rel='stylesheet' href='/stylesheets/style2.css'/>
+    <link rel="manifest" href="/manifest.json">
+
 </head>
 <body>
 <h1>Plants</h1>
-<h2><%= plants.length %> entries</h2>
+<h2 id="plantEntriesCount">Loading</h2>
 
 <div id="searchPanel">
         <input type="radio" id="datetime" name="sort_heuristic" value="HTML">
@@ -22,5 +25,6 @@
 </div>
 <script type="module" src="/javascripts/search.mjs"></script>
 <script type="module" src="/javascripts/list_plants.mjs"></script>
+<script type="module" src="/javascripts/database.mjs"></script>
 </body>
 </html>
