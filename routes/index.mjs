@@ -61,7 +61,6 @@ router.post('/add', upload.single('myImg'), function (req, res, next) {
 });
 
 router.get('/plants', async function (req, res, next) {
-  const plants = await get_plants();
   res.render('plants', { plants: plants });
 });
 

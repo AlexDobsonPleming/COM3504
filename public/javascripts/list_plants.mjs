@@ -1,4 +1,5 @@
 "use strict";
+import {addPlant, reloadPlants, getPlants} from "./database.mjs";
 
 function createPlantDetailedElement(plantData) {
     const rootPlantDiv = document.createElement("div");
@@ -56,7 +57,7 @@ function createPlantDetailedElement(plantData) {
     plantMapLocation.scrolling = "no";
     plantMapLocation.marginHeight = "0";
     plantMapLocation.marginWidth = "0";
-    plantMapLocation.src = `https://maps.google.com/maps?q=${plantData.plant_location.lat},${plantData.plant_location.long}&hl=es&z=14&output=embed`;
+    plantMapLocation.src = `https://maps.google.com/maps?q=${plantData.plant_location.lat},${plantData.plant_location.long}&hl=en&z=14&output=embed`;
     rootPlantDiv.appendChild(plantMapLocation);
     //TODO add offline detector and don't render iframe if offline
 
@@ -108,7 +109,13 @@ function createPlantListElement(plantData) {
 }
 
 async function load_page() {
-    const plants = await (await fetch("API/plants")).json();
+    const apiPlants = await (await fetch("API/plants")).json();
+
+    await reloadPlants(apiPlants);
+    const plants = await getPlants();
+
+    const plantCountElement = document.getElementById('plantEntriesCount');
+    plantCountElement.textContent = `${plants.length} plants`;
 
 
     const rootListElement = document.getElementById("searchResults");
