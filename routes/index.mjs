@@ -11,7 +11,15 @@ let upload = multer();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Plant classification fun' });
+    res.render('home', { title: 'Home Page' });
+});
+
+router.get('/plant', function(req, res, next) {
+    res.render('plant', { title: 'Plant Page' });
+});
+
+router.get('/add-plant', function(req, res, next) {
+    res.render('add-plant', { title: 'Add Plant' });
 });
 
 router.get('/add', function(req, res, next) {
