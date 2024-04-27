@@ -2,7 +2,6 @@ import express from "express";
 var router = express.Router();
 import plants from "../models/plants.mjs";
 import multer from "multer";
-import fs from "fs";
 import {get_all as get_plants} from "../services/plants.js";
 import Plant from "../models/plants.mjs";
 
