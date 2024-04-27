@@ -45,7 +45,7 @@ router.post('/add', upload.single('myImg'), function (req, res, next) {
         date_time_seen: date_time_seen,
         plant_width: plant_width,
         plant_height: plant_height,
-        plant_location: {lat: plant_lat, long: plant_long },
+        plant_location: {lat: latitude, long: longitude },
         has_flowers: has_flowers,
         has_fruit: has_fruit,
         has_seeds: has_seeds,
