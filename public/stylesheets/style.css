@@ -132,36 +132,79 @@ section {
 
 .cards-container {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px; /* Adjust the space between cards as necessary */
-    padding: 20px; /* Padding around the container */
     color: #FFFFF0;
+    justify-content: space-evenly;
 }
 
-.card {
-    flex: 0 1 300px; /* flex-grow, flex-shrink, flex-basis */
+.card-link {
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Align items horizontally in the center */
-    background: #3F4808; /* Background color for the card */
-    border-radius: 20px; /* Rounded corners for the card */
-    overflow: hidden; /* Ensures the content doesn't overflow the card's border-radius */
+    margin: 0;
+    padding: 0;
+    height: 400px; /* Fixed height for all cards */
+    flex-basis: calc(33.333% - 20px);
+    /*flex: 0 1 auto; /* Change this from a fixed 300px to auto */
+    min-width: 250px; /* Set a min-width to prevent cards from getting too small */
     cursor: pointer;
 }
 
+.card {
+    display: flex;
+    flex-direction: column;
+    background: #3F4808;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 10px;
+    padding: 0;
+    width: 100%;
+}
+
 .card img {
-    width: 100%; /* Ensure the image covers the card width */
-    display: block; /* Remove bottom space under the image */
+    width: 100%;
+    height: 60%; /* Image takes up half of the card's height */
+    object-fit: cover;
 }
 
 .card-content {
-    padding: 20px;
+    width: 100%;
+    height: 40%; /* Content takes the remaining half of the card's height */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the text in the card */
-    gap: 10px; /* Space between text elements */
+    margin: 0;
+    padding: 9px;
+    gap: 5px;
+    box-sizing: border-box;
 }
+
+.card-content h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.card-content p {
+    margin: 0;
+    padding: 0;
+}
+
+/*Filter section*/
+
+.filter-section {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    gap: 10px; /* Space between buttons */
+}
+
+.filter-section button {
+    background-color: #8A9B6E; /* Initial background color */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.filter-section button.active {
+    background-color: #3F4808; /* Active state background color */
+    color: #FFFFF0; /* Active state text color */
+}
+
 
 /* Style for the info-section */
 .info-section {
@@ -213,7 +256,7 @@ button {
     color: #FFFFF0; /* Button text color */
     border: none; /* No border */
     cursor: pointer; /* Cursor indicates clickable item */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: adds a shadow effect */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds a shadow effect */
 }
 
 button:hover {
