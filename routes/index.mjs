@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     res.render('home', { title: 'Home Page' });
 });
 
-router.get('/plant', function(req, res, next) {
+router.get('/plant/:plant_id', function(req, res, next) {
     res.render('plant', { title: 'Plant Page' });
 });
 
