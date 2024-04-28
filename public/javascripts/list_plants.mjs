@@ -141,6 +141,7 @@ function createPlantDetailedElement(plantData) {
 
 function createPlantCard(plantData) {
     const rootPlantLink = document.createElement("a");
+    rootPlantLink.href = `/plant/${plantData._id}`
     rootPlantLink.className="card-link searchEntry";
 
     //add data attributes

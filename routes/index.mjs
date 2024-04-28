@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     res.render('home', { title: 'Home Page' });
 });
 
-router.get('/plant', function(req, res, next) {
+router.get('/plant/:plant_id', function(req, res, next) {
     res.render('plant', { title: 'Plant Page' });
 });
 
@@ -65,12 +65,9 @@ router.post('/add', upload.single('myImg'), function (req, res, next) {
     })
 
   newPlant.save();
-  res.redirect('/plants');
+  res.redirect('/');
 });
 
-router.get('/plants', async function (req, res, next) {
-  res.render('plants', { plants: plants });
-});
 
 router.get('/API/plants', async function(req, res) {
   const plants = await get_plants();
