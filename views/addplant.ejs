@@ -1,85 +1,87 @@
-<html>
-<head>
+<form class="plant-form" action="/add" method="POST" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Plant Image</legend>
+        <label for="myImage" class="image-upload-label">
+            <img id="previewImage" src="/images/plant-image.png" alt="Plant Image Placeholder">
+        </label>
+        <input type="file" id="myImage" name="myImg" accept="image/*" required>
 
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style2.css'/>
+    </fieldset>
 
-</head>
-<body>
-<h1><%= title %></h1>
-<p>Plant</p>
-<form action="/add" method="POST" enctype="multipart/form-data">
-    <label for="userName">User Name:</label>
-    <input type="text" id="userName" name="user_name" required><br><br>
+    <fieldset>
+        <legend>Plant Details</legend>
+        <label for="plantName">Plant Name:</label>
+        <input type="text" id="plantName" name="plant_name" required>
 
-    <label for="plantName">Plant Name:</label>
-    <input type="text" id="plantName" name="plant_name" required><br><br>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
 
-    <label for="identifyStatus">Identify Status:</label>
-    <select id="identifyStatus" name="identify_status">
-        <option value="Completed">Completed</option>
-        <option value="In-Progress">In-Progress</option>
-    </select>
-    <br><br>
+        <label for="identifyStatus">Identification Status:</label>
+        <select id="identifyStatus" name="identify_status">
+            <option value="Completed">Completed</option>
+            <option value="In-Progress">In-Progress</option>
+        </select>
+    </fieldset>
 
-    <label for="description">Description:</label>
-    <input type="text" id="description" name="description" required><br><br>
+    <fieldset>
+        <legend>Location Information</legend>
+        <label for="dateTime">Date and Time seen:</label>
+        <input type="datetime-local" id="dateTime" name="date_time_seen" required>
 
-    <label for="dateTime">Date and Time seen:</label>
-    <input type="datetime-local" id="dateTime" name="date_time_seen" required><br><br>
+        <label for="latitude">Latitude:</label>
+        <input type="number" id="latitude" name="latitude" step="any" required>
 
-    <label for="plantWidth">Plant Width:</label>
-    <input type="number" id="plantWidth" name="plant_width" required><br><br>
+        <label for="longitude">Longitude:</label>
+        <input type="number" id="longitude" name="longitude" step="any" required>
 
-    <label for="plantHeight">Plant Height:</label>
-    <input type="number" id="plantHeight" name="plant_height" required><br><br>
+        <button type="button" onclick="getLocation();">Get Location</button>
+    </fieldset>
 
-    <label for="latitude">Latitude:</label>
-    <input type="number" id="latitude" name="latitude" step="any" required><br><br>
+    <fieldset>
+        <legend>Plant Characteristics</legend>
+        <label for="plantWidth">Plant Width:</label>
+        <input type="number" id="plantWidth" name="plant_width" required>
 
-    <label for="longitude">Longitude:</label>
-    <input type="number" id="longitude" name="longitude" step="any" required><br><br>
+        <label for="plantHeight">Plant Height:</label>
+        <input type="number" id="plantHeight" name="plant_height" required>
 
-    <button onclick="getLocation();">Location</button>
-    <script>
-        function getLocation()
-        {
-            navigator.geolocation.getCurrentPosition(function(position)
-            {
-                var coordinates = position.coords;
-                document.getElementById('latitude').value = coordinates.latitude;
-                document.getElementById('longitude').value = coordinates.longitude;
-            });
-        }
-     </script>
+        <label for="hasFlowers">Has Flowers:</label>
+        <input type="checkbox" id="hasFlowers" name="has_flowers" value="true">
 
-    <label for="hasFlowers">Has Flowers:</label>
-    <input type="checkbox" id="hasFlowers" name="has_flowers" value="true"><br><br>
+        <label for="hasLeaves">Has Leaves:</label>
+        <input type="checkbox" id="hasLeaves" name="has_leaves" value="true">
 
-    <label for="hasLeaves">Has Leaves:</label>
-    <input type="checkbox" id="hasLeaves" name="has_leaves" value="true"><br><br>
+        <label for="hasFruit">Has Fruit:</label>
+        <input type="checkbox" id="hasFruit" name="has_fruit" value="true">
 
-    <label for="hasFruit">Has Fruit:</label>
-    <input type="checkbox" id="hasFruit" name="has_fruit" value="true"><br><br>
+        <label for="hasSeeds">Has Seeds:</label>
+        <input type="checkbox" id="hasSeeds" name="has_seeds" value="true">
 
-    <label for="hasSeeds">Has Seeds:</label>
-    <input type="checkbox" id="hasSeeds" name="has_seeds" value="true"><br><br>
+        <label for="sunExposure">Sun Exposure:</label>
+        <select id="sunExposure" name="sun_exposure">
+            <option value="Full sun">Full sun</option>
+            <option value="Partial shade">Partial shade</option>
+            <option value="Full shade">Full shade</option>
+        </select>
 
-    <label for="sunExposure">Sun Exposure:</label>
-    <select id="sunExposure" name="sun_exposure">
-        <option value="Full sun">Full sun</option>
-        <option value="Partial shade">Partial shade</option>
-        <option value="Full shade">Full shade</option>
-    </select>
-    <br><br>
+        <label for="plantColour">Plant Colour:</label>
+        <input type="color" id="plantColour" name="plant_colour" value="#07a639" required>
 
-    <label for="plantColour">Plant Colour :</label>
-    <input type="color" id="plantColour" name="plant_colour" value = "#07a639" required><br><br>
+        <label for="flowerColour">Flower Colour:</label>
+        <input type="color" id="flowerColour" name="flower_colour" value="#07a639" required>
+    </fieldset>
 
-    <label for="myImage">Image:</label>
-    <input type="file" id="myImage" name="myImg" accept="image/*" required><br><br>
-
-    <button type="submit">Submit</button>
+    <button type="submit">Add Plant</button>
 </form>
-</body>
-</html>
+
+<script>
+    function getLocation()
+    {
+        navigator.geolocation.getCurrentPosition(function(position)
+        {
+            var coordinates = position.coords;
+            document.getElementById('latitude').value = coordinates.latitude;
+            document.getElementById('longitude').value = coordinates.longitude;
+        });
+    }
+</script>

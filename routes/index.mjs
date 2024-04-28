@@ -5,7 +5,6 @@ import multer from "multer";
 import {get_all as get_plants} from "../services/plants.js";
 import Plant from "../models/plants.mjs";
 
-
 let upload = multer();
 
 /* GET home page. */
@@ -15,10 +14,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/plant/:plant_id', function(req, res, next) {
     res.render('plant', { title: 'Plant Page' });
-});
-
-router.get('/addplant', function(req, res, next) {
-    res.render('addplants', { title: 'Add Plant' });
 });
 
 router.get('/add', function(req, res, next) {
@@ -42,6 +37,7 @@ router.post('/add', upload.single('myImg'), function (req, res, next) {
       has_seeds,
       sun_exposure,
       plant_colour,
+      flower_colour,
   } = req.body;
   var imageBase64 = req.file.buffer.toString("base64");
 
