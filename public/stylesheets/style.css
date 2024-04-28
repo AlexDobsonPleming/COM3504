@@ -216,11 +216,11 @@ button {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: adds a shadow effect */
 }
 
-button.active {
-    background-color: #03fc17; /* Clicked on colour */
-}
-
 button:hover {
     background-color: #8A9B6E; /* Darker shade for hover state */
     box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
+}
+
+button.active {
+    background-color: #03fc17; /* Clicked on colour */
 }
