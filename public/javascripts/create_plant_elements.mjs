@@ -21,6 +21,10 @@ export function dateTimeSeenText(date_time) {
 
 
 export function createMapEmbed(plant_location) {
+    // Create the div that will wrap the iframe
+    const mapContainer = document.createElement("div");
+    mapContainer.className = "map"; // Add the 'map' class
+
     const plantMapLocation = document.createElement("iframe");
     plantMapLocation.width = "300";
     plantMapLocation.height = "170";
@@ -29,7 +33,12 @@ export function createMapEmbed(plant_location) {
     plantMapLocation.marginHeight = "0";
     plantMapLocation.marginWidth = "0";
     plantMapLocation.src = `https://maps.google.com/maps?q=${plant_location.lat},${plant_location.long}&hl=en&z=14&output=embed`;
-    return plantMapLocation;
+
+    // Append the iframe to the div container
+    mapContainer.appendChild(plantMapLocation);
+
+    // Return the div container
+    return mapContainer;
 }
 
 

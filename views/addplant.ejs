@@ -1,77 +1,99 @@
 <form class="plant-form" action="/add" method="POST" enctype="multipart/form-data">
-    <fieldset>
-        <legend>Plant Image</legend>
-        <label for="myImage" class="image-upload-label">
-            <img id="previewImage" src="/images/plant-image.png" alt="Plant Image Placeholder">
-        </label>
-        <input type="file" id="myImage" name="myImg" accept="image/*" required>
+    <div class="first-container">
+        <fieldset class="image-section">
+            <legend>Plant Image</legend>
+            <label for="myImage" class="image-upload-label">
+                <img id="previewImage" src="/images/plant.png" alt="Plant Image Placeholder">
+                <span class="btn">Click to Add photo</span>
+            </label>
+            <input type="file" id="myImage" name="myImg" accept="image/*" required style="display: none;">
+        </fieldset>
 
-    </fieldset>
+        <fieldset class="details-section">
+            <legend>Plant Details</legend>
+            <label for="plantName">Plant Name:</label>
+            <input type="text" id="plantName" name="plant_name" required>
 
-    <fieldset>
-        <legend>Plant Details</legend>
-        <label for="plantName">Plant Name:</label>
-        <input type="text" id="plantName" name="plant_name" required>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" cols="50" required></textarea>
 
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required>
+            <label for="userName">User Name:</label>
+            <input type="text" id="userName" name="user_name" required>
 
-        <label for="identifyStatus">Identification Status:</label>
-        <select id="identifyStatus" name="identify_status">
-            <option value="Completed">Completed</option>
-            <option value="In-Progress">In-Progress</option>
-        </select>
-    </fieldset>
+            <label for="identifyStatus">Identification Status:</label>
+            <select id="identifyStatus" name="identify_status">
+                <option value="Completed">Completed</option>
+                <option value="In-Progress">In-Progress</option>
+            </select>
+        </fieldset>
+    </div>
+    <div class="second-container">
+        <fieldset class="location-section">
+            <legend>Location Information</legend>
+            <label for="dateTime">Date and Time seen:</label>
+            <input type="datetime-local" id="dateTime" name="date_time_seen" required>
 
-    <fieldset>
-        <legend>Location Information</legend>
-        <label for="dateTime">Date and Time seen:</label>
-        <input type="datetime-local" id="dateTime" name="date_time_seen" required>
+            <label for="latitude">Latitude:</label>
+            <input type="number" id="latitude" name="plant_lat" step="any" required>
 
-        <label for="latitude">Latitude:</label>
-        <input type="number" id="latitude" name="plant_lat" step="any" required>
+            <label for="longitude">Longitude:</label>
+            <input type="number" id="longitude" name="plant_long" step="any" required>
 
-        <label for="longitude">Longitude:</label>
-        <input type="number" id="longitude" name="plant_long" step="any" required>
+            <button type="button" onclick="getLocation();">Get Location</button>
+        </fieldset>
 
-        <button type="button" onclick="getLocation();">Get Location</button>
-    </fieldset>
+        <fieldset class="characteristics-section">
+            <legend>Plant Characteristics</legend>
+            <label for="plantWidth">Plant Width:</label>
+            <input type="number" id="plantWidth" name="plant_width" required>
 
-    <fieldset>
-        <legend>Plant Characteristics</legend>
-        <label for="plantWidth">Plant Width:</label>
-        <input type="number" id="plantWidth" name="plant_width" required>
+            <label for="plantHeight">Plant Height:</label>
+            <input type="number" id="plantHeight" name="plant_height" required>
 
-        <label for="plantHeight">Plant Height:</label>
-        <input type="number" id="plantHeight" name="plant_height" required>
+            <div class="label-input-container">
+                <label for="hasFlowers">Has Flowers:</label>
+                <input type="checkbox" id="hasFlowers" name="has_flowers" value="true">
+            </div>
 
-        <label for="hasFlowers">Has Flowers:</label>
-        <input type="checkbox" id="hasFlowers" name="has_flowers" value="true">
+            <div class="label-input-container">
+                <label for="hasLeaves">Has Leaves:</label>
+                <input type="checkbox" id="hasLeaves" name="has_leaves" value="true">
+            </div>
 
-        <label for="hasLeaves">Has Leaves:</label>
-        <input type="checkbox" id="hasLeaves" name="has_leaves" value="true">
+            <div class="label-input-container">
+                <label for="hasFruit">Has Fruit:</label>
+                <input type="checkbox" id="hasFruit" name="has_fruit" value="true">
+            </div>
 
-        <label for="hasFruit">Has Fruit:</label>
-        <input type="checkbox" id="hasFruit" name="has_fruit" value="true">
+            <div class="label-input-container">
+                <label for="hasSeeds">Has Seeds:</label>
+                <input type="checkbox" id="hasSeeds" name="has_seeds" value="true">
+            </div>
 
-        <label for="hasSeeds">Has Seeds:</label>
-        <input type="checkbox" id="hasSeeds" name="has_seeds" value="true">
+            <label for="sunExposure">Sun Exposure:</label>
+            <select id="sunExposure" name="sun_exposure">
+                <option value="Full sun">Full sun</option>
+                <option value="Partial shade">Partial shade</option>
+                <option value="Full shade">Full shade</option>
+            </select>
 
-        <label for="sunExposure">Sun Exposure:</label>
-        <select id="sunExposure" name="sun_exposure">
-            <option value="Full sun">Full sun</option>
-            <option value="Partial shade">Partial shade</option>
-            <option value="Full shade">Full shade</option>
-        </select>
+            <div class="label-input-container">
+                <label for="plantColour">Plant Colour:</label>
+                <input type="color" id="plantColour" name="plant_colour" value="#07a639" required>
+            </div>
 
-        <label for="plantColour">Plant Colour:</label>
-        <input type="color" id="plantColour" name="plant_colour" value="#07a639" required>
+            <div class="label-input-container">
+                <label for="flowerColour">Flower Colour:</label>
+                <input type="color" id="flowerColour" name="flower_colour" value="#07a639" required>
+            </div>
 
-        <label for="flowerColour">Flower Colour:</label>
-        <input type="color" id="flowerColour" name="flower_colour" value="#07a639" required>
-    </fieldset>
+        </fieldset>
+    </div>
+    <div class="submit-button">
+        <button type="submit">Add Plant</button>
+    </div>
 
-    <button type="submit">Add Plant</button>
+
 </form>
 
 <script>
