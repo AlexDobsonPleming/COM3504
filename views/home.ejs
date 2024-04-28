@@ -1,3 +1,7 @@
+<script type="module" src="/javascripts/search.mjs"></script>
+<script type="module" src="/javascripts/list_plants.mjs"></script>
+<script type="module" src="/javascripts/database.mjs"></script>
+
 <div class="background-section">
     <section class="welcome-section">
             <article class="image-article">
@@ -9,82 +13,18 @@
             <article class="text-article">
                 <h1>WELCOME!</h1>
                 <p>Proin ut vehicula elit. Phasellus ullamcorper vitae risus at sollicitudin. Aenean pretium magna ut interdum fringilla.</p>
+                <h2 id="plantEntriesCount">Loading</h2>
             </article>
     </section>
 </div>
 
-<section class="filter-section">
-    <button>Sort by Date Time</button>
-    <button>Sort by Identification Status</button>
-    <button>Sort by Distance</button>
+<section class="filter-section" id="searchPanel">
+    <button id="datetime">Date Time</button>
+    <button id="identification">Identification Status</button>
+    <button id="distance">Distance</button>
 </section>
 
-<section class="cards-container">
-    <a href="/plant" class="card-link">
-        <article class="card">
-            <img src="/images/header-background.jpg" alt="Plant Thumbnail">
-            <div class="card-content">
-                <h2>Name</h2>
-                <p>Date and time</p>
-                <p>Identification status</p>
-                <p>Coordinates</p>
-            </div>
-        </article>
-    </a>
-    <a href="/plant" class="card-link">
-        <article class="card">
-            <img src="/images/cactus.jpeg" alt="Plant Thumbnail">
-            <div class="card-content">
-                <h2>Name</h2>
-                <p>Date and time</p>
-                <p>Identification status</p>
-                <p>Coordinates</p>
-            </div>
-        </article>
-    </a>
-    <a href="/plant" class="card-link">
-        <article class="card">
-            <img src="/images/favicon.png" alt="Plant Thumbnail">
-            <div class="card-content">
-                <h2>Name</h2>
-                <p>Date and time</p>
-                <p>Identification status</p>
-                <p>Coordinates</p>
-            </div>
-        </article>
-    </a>
-    <a href="/plant" class="card-link">
-        <article class="card">
-            <img src="/images/favicon.png" alt="Plant Thumbnail">
-            <div class="card-content">
-                <h2>Name</h2>
-                <p>Date and time</p>
-                <p>Identification status</p>
-                <p>Coordinates</p>
-            </div>
-        </article>
-    </a>
-    <a href="/plant" class="card-link">
-        <article class="card">
-            <img src="/images/favicon.png" alt="Plant Thumbnail">
-            <div class="card-content">
-                <h2>Name</h2>
-                <p>Date and time</p>
-                <p>Identification status</p>
-                <p>Coordinates</p>
-            </div>
-        </article>
-    </a>
-    <a href="/plant" class="card-link">
-        <article class="card">
-            <img src="/images/favicon.png" alt="Plant Thumbnail">
-            <div class="card-content">
-                <h2>Name</h2>
-                <p>Date and time</p>
-                <p>Identification status</p>
-                <p>Coordinates</p>
-            </div>
-        </article>
-    </a>
-    <!-- Repeat for other cards -->
+
+<section class="cards-container" id="searchResults">
+
 </section>

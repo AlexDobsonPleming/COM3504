@@ -87,8 +87,15 @@ async function getPosition() {
     }
 }
 
-function inputClicked() {
-    const inputClickedOn = radioButtons.filter(x =>x.element.checked )[0];
+function setColourToClicked(button) {
+    const activeClassName= "active";
+    radioButtons.forEach(x => x.element.className = x.element.className.replace(activeClassName, ""));
+    button.className += ` ${activeClassName}`;
+}
+function inputClicked(e) {
+    const buttonClicked = e.target;
+    setColourToClicked(buttonClicked);
+    const inputClickedOn = radioButtons.filter(x => x.element === buttonClicked)[0];
 
 
     const searchEntryClassName = "searchEntry";

@@ -26,33 +26,6 @@ a {
     color: inherit; /* Inherits the color from the parent element */
 }
 
-/*GENERAL BUTTON STYLE*/
-
-button {
-    max-width: 300px; /* Maximum width of the button */
-    min-width: 150px; /* Minimum width of the button */
-    padding: 1rem;
-    /*padding: 1vw; /* Responsive vertical padding based on viewport width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    text-align: center; /* Center the text inside the button */
-    white-space: normal; /* Allow the text to wrap if needed */
-    overflow: hidden; /* Prevent text from spilling out */
-    text-overflow: ellipsis; /* Add an ellipsis if the text overflows */
-    border-radius: 30px; /* Rounded corners */
-    /*font-size: 1.3vw; /* Responsive font size based on viewport width */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
-    background-color: #3F4808; /* Example green background color */
-    color: #FFFFF0; /* Button text color */
-    border: none; /* No border */
-    cursor: pointer; /* Cursor indicates clickable item */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds a shadow effect */
-}
-
-button:hover {
-    background-color: #8A9B6E; /* Darker shade for hover state */
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
-}
-
 /*HEADER STYLE*/
 
 header {
@@ -119,7 +92,6 @@ main h1{
 section {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     width: 75%;
     margin: 2rem auto; /* top and bottom | left and right */
 }
@@ -131,18 +103,10 @@ section {
     color: #FFFFF0;
 }
 
-
 .image-article {
+    flex: 1; /* Adjust as necessary for your layout */
+    margin-right: 20px; /* Spacing between the image and the text */
     position: relative; /* Set the parent to relative positioning */
-    display: flex;
-    flex: 0;
-    margin: 0 20px 0 0;
-    padding: 0;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 400px; /* Fixed height for all cards */
-    flex-basis: calc(33.333% - 20px);
-    min-width: 250px; /* Set a min-width to prevent cards from getting too small */
 }
 
 .text-article {
@@ -151,9 +115,9 @@ section {
 }
 
 .image-article img {
-    display: flex;
     width: 100%; /* Make sure the image is not bigger than its container */
     height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove bottom space/margin */
 }
 
 .top-button {
@@ -164,140 +128,99 @@ section {
     width: 80%; /* Percentage of parent's width, adjust as needed */
 }
 
-/*Filter section*/
-
-.filter-section {
-    display: flex;
-    justify-content: center; /* Center the buttons */
-    gap: 10px; /* Space between buttons */
-}
-
-.filter-section button {
-    background-color: #8A9B6E; /* Initial background color */
-    transition: background-color 0.3s; /* Smooth transition for background color */
-}
-
-.filter-section button.active {
-    background-color: #3F4808; /* Active state background color */
-    color: #FFFFF0; /* Active state text color */
-}
-
 /*Plant cards section*/
 
 .cards-container {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px; /* Adjust the space between cards as necessary */
+    padding: 20px; /* Padding around the container */
     color: #FFFFF0;
-    justify-content: space-evenly;
-}
-
-.card-link {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    height: 400px; /* Fixed height for all cards */
-    flex-basis: calc(33.333% - 20px);
-    /*flex: 0 1 auto; /* Change this from a fixed 300px to auto */
-    min-width: 250px; /* Set a min-width to prevent cards from getting too small */
-    cursor: pointer;
 }
 
 .card {
+    flex: 0 1 300px; /* flex-grow, flex-shrink, flex-basis */
     display: flex;
     flex-direction: column;
-    background: #3F4808;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 10px;
-    padding: 0;
-    width: 100%;
-}
-
-.card:hover {
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
+    align-items: center; /* Align items horizontally in the center */
+    background: #3F4808; /* Background color for the card */
+    border-radius: 20px; /* Rounded corners for the card */
+    overflow: hidden; /* Ensures the content doesn't overflow the card's border-radius */
+    cursor: pointer;
 }
 
 .card img {
-    width: 100%;
-    height: 60%; /* Image takes up half of the card's height */
-    object-fit: cover;
+    width: 100%; /* Ensure the image covers the card width */
+    display: block; /* Remove bottom space under the image */
 }
 
 .card-content {
-    width: 100%;
-    height: 40%; /* Content takes the remaining half of the card's height */
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    margin: 0;
-    padding: 9px;
-    gap: 5px;
-    box-sizing: border-box;
-}
-
-.card-content h2 {
-    margin: 0;
-    padding: 0;
-}
-
-.card-content p {
-    margin: 0;
-    padding: 0;
+    align-items: center; /* Center the text in the card */
+    gap: 10px; /* Space between text elements */
 }
 
 /* Style for the info-section */
-
-.plant-info{
-    display: flex;
-    flex-direction: column;
-}
-
 .info-section {
     display: flex;
-    flex-direction: row;
-    gap: 1%;
     justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom: 0;
-    min-width: 380px; /* Set a min-width to prevent cards from getting too small */
-}
-
-.info-section h2, .info-section p {
-    margin: 0;
-    padding: 0;
+    margin: 20px 0; /* Adjust the margin as needed */
 }
 
 .info-block {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    gap: 5px;
-    box-sizing: border-box;
     background: #8A9B6E;
-    border-radius: 20px; /* Rounded corners */
+    flex-basis: 48%; /* Adjust width to create space between the blocks */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
     color: #FFFFF0;
-    flex-basis: 49%;
-    min-width: 380px; /* Set a min-width to prevent cards from getting too small */
-    margin-bottom: 2rem;
 }
 
 /* Style for the chat-section */
 .chat-section {
-    display: flex;
-    justify-content: center;
     background: #8A9B6E;
-    border-radius: 20px; /* Rounded corners */
-    color: #FFFFF0;
-    margin-top: 0;
-    height: 200px;
-    min-width: 380px; /* Set a min-width to prevent cards from getting too small */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 20px 0;
 }
 
 .chat-section h1 {
-    margin: 10px;
+    color: #FFFFF0;
+    padding: 20px 0;
+    margin: 0;
 }
 
-/*Add plant form*/
+/*GENERAL BUTTON STYLE*/
 
+button {
+    max-width: 300px; /* Maximum width of the button */
+    min-width: 150px; /* Minimum width of the button */
+    padding: 1vw; /* Responsive vertical padding based on viewport width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    text-align: center; /* Center the text inside the button */
+    white-space: normal; /* Allow the text to wrap if needed */
+    overflow: hidden; /* Prevent text from spilling out */
+    text-overflow: ellipsis; /* Add an ellipsis if the text overflows */
+    border-radius: 30px; /* Rounded corners */
+    font-size: 1.3vw; /* Responsive font size based on viewport width */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    background-color: #3F4808; /* Example green background color */
+    color: #FFFFF0; /* Button text color */
+    border: none; /* No border */
+    cursor: pointer; /* Cursor indicates clickable item */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: adds a shadow effect */
+}
 
+button:hover {
+    background-color: #8A9B6E; /* Darker shade for hover state */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
+}
 
+button.active {
+    background-color: #03fc17; /* Clicked on colour */
+}
