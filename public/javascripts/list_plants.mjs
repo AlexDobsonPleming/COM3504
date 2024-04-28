@@ -144,19 +144,19 @@ function createPlantCard(plantData) {
     rootPlantLink.className="card-link searchEntry";
 
     //add data attributes
-    const dateTimeAttribute= document.createAttribute("datetime");
+    const dateTimeAttribute= document.createAttribute("data-datetime");
     dateTimeAttribute.value=plantData.date_time_seen;
     rootPlantLink.setAttributeNode(dateTimeAttribute);
 
-    const identificationStatusAttribute= document.createAttribute("identification");
+    const identificationStatusAttribute= document.createAttribute("data-identification");
     identificationStatusAttribute.value=plantData.identify_status;
     rootPlantLink.setAttributeNode(identificationStatusAttribute);
 
-    const latitudeAttribute= document.createAttribute("lat");
+    const latitudeAttribute= document.createAttribute("data-lat");
     latitudeAttribute.value=plantData.plant_location.lat;
     rootPlantLink.setAttributeNode(latitudeAttribute);
 
-    const longtitudeAttribute= document.createAttribute("long");
+    const longtitudeAttribute= document.createAttribute("data-long");
     longtitudeAttribute.value=plantData.plant_location.long;
     rootPlantLink.setAttributeNode(longtitudeAttribute);
 
