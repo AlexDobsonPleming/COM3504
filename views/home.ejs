@@ -1,3 +1,7 @@
+<script type="module" src="/javascripts/search.mjs"></script>
+<script type="module" src="/javascripts/list_plants.mjs"></script>
+<script type="module" src="/javascripts/database.mjs"></script>
+
 <div class="background-section">
     <section class="welcome-section">
             <article class="image-article">
@@ -9,6 +13,7 @@
             <article class="text-article">
                 <h1>WELCOME!</h1>
                 <p>Proin ut vehicula elit. Phasellus ullamcorper vitae risus at sollicitudin. Aenean pretium magna ut interdum fringilla.</p>
+                <h2 id="plantEntriesCount">Loading</h2>
             </article>
     </section>
 </div>
@@ -18,40 +23,16 @@
     <button>Identification Status</button>
     <button>Distance</button>
 </section>
+<div id="searchPanel">
+    <input type="radio" id="datetime" name="sort_heuristic">
+    <label for="datetime">Sort by date time</label><br>
+    <input type="radio" id="identification" name="sort_heuristic">
+    <label for="identification">Sort by identification status</label><br>
+    <input type="radio" id="distance" name="sort_heuristic">
+    <label for="distance">Sort by distance (WIP!)</label>
+</div>
 
-<section class="cards-container">
-    <a href="/plant" class="card-link">
-        <article class="card">
-            <img src="/images/plant-image.png" alt="Plant Thumbnail">
-            <div class="card-content">
-                <h2>NAME</h2>
-                <p>Date and time</p>
-                <p>Identification status</p>
-                <p>Coordinates</p>
-            </div>
-        </article>
-    </a>
-    <a href="/plant" class="card-link">
-        <article class="card">
-            <img src="/images/plant-image.png" alt="Plant Thumbnail">
-            <div class="card-content">
-                <h2>NAME</h2>
-                <p>Date and time</p>
-                <p>Identification status</p>
-                <p>Coordinates</p>
-            </div>
-        </article>
-    </a>
-    <a href="/plant" class="card-link">
-        <article class="card">
-            <img src="/images/plant-image.png" alt="Plant Thumbnail">
-            <div class="card-content">
-                <h2>NAME</h2>
-                <p>Date and time</p>
-                <p>Identification status</p>
-                <p>Coordinates</p>
-            </div>
-        </article>
-    </a>
-    <!-- Repeat for other cards -->
+
+<section class="cards-container" id="searchResults">
+
 </section>
