@@ -8,7 +8,9 @@ const openNewDb = () => new Promise((resolve, reject) => {
         const db = ev.target.result
         const plantsObjectStoreName = "plants";
 
-        db.deleteObjectStore(plantsObjectStoreName);
+        if (db.objectStoreNames.contains(plantsObjectStoreName)) {
+            db.deleteObjectStore(plantsObjectStoreName);
+        }
 
         // Create object store for plants with a key to the _id mongodb field
         db.createObjectStore(plantsObjectStoreName, { keyPath: "_id" })
