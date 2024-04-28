@@ -67,7 +67,7 @@ nav{
     width: 75%;
     margin: auto;
     gap: 1rem;
-    padding: 1rem 0rem; /* top & bottom | right & left */
+    padding: 1rem 0; /* top & bottom | right & left */
 }
 
 nav ul {

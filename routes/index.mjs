@@ -17,8 +17,8 @@ router.get('/plant', function(req, res, next) {
     res.render('plant', { title: 'Plant Page' });
 });
 
-router.get('/add-plant', function(req, res, next) {
-    res.render('add-plant', { title: 'Add Plant' });
+router.get('/addplant', function(req, res, next) {
+    res.render('addplants', { title: 'Add Plant' });
 });
 
 router.get('/add', function(req, res, next) {
