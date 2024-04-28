@@ -1,13 +1,17 @@
 
 
 const openNewDb = () => new Promise((resolve, reject) => {
-    const requestIDB = indexedDB.open("plantsDB", 1);
+    const requestIDB = indexedDB.open("plantsDB", 2);
 
     // Function to handle IndexedDB upgrade
     const handleUpgrade = (ev) => {
         const db = ev.target.result
-        // Create object store for tasks with auto-incrementing key
-        db.createObjectStore("plants", { keyPath: "id", autoIncrement: true })
+        const plantsObjectStoreName = "plants";
+
+        db.deleteObjectStore(plantsObjectStoreName);
+
+        // Create object store for plants with a key to the _id mongodb field
+        db.createObjectStore(plantsObjectStoreName, { keyPath: "_id" })
 
         console.log("Upgraded object store...")
         const transaction = ev.target.transaction;
@@ -35,7 +39,6 @@ const getDb = async () => {
     return db;
 }
 
-
 const getPlants = async () => new Promise(async (resolve, reject) => {
     const plantIdb = await getDb();
     const transaction = plantIdb.transaction(["plants"])
@@ -49,6 +52,19 @@ const getPlants = async () => new Promise(async (resolve, reject) => {
     getAllRequest.onerror = reject;
 
 });
+
+const getPlant = async (plantId) => new Promise(async (resolve, reject) => {
+    const plantIdb = await getDb();
+    const transaction = plantIdb.transaction(["plants"])
+    const plantStore = transaction.objectStore("plants")
+    const getPlantRequest = plantStore.get(plantId)
+    getPlantRequest.onsuccess = () => {
+        const plant = getPlantRequest.result // Now an array
+        resolve(plant);
+    };
+
+    getPlantRequest.onerror = reject;
+})
 
 const addPlant = async (newPlant) => new Promise(async (resolve, reject) => {
     const plantIDB = await getDb();
@@ -83,4 +99,4 @@ const reloadPlants = async (newPlants) => new Promise(async (resolve, reject) =>
 });
 
 
-export { getDb, getPlants, addPlant, reloadPlants };
+export { getDb, getPlant, getPlants, addPlant, reloadPlants };
