@@ -26,6 +26,33 @@ a {
     color: inherit; /* Inherits the color from the parent element */
 }
 
+/*GENERAL BUTTON STYLE*/
+
+button {
+    max-width: 300px; /* Maximum width of the button */
+    min-width: 150px; /* Minimum width of the button */
+    padding: 1rem;
+    /*padding: 1vw; /* Responsive vertical padding based on viewport width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    text-align: center; /* Center the text inside the button */
+    white-space: normal; /* Allow the text to wrap if needed */
+    overflow: hidden; /* Prevent text from spilling out */
+    text-overflow: ellipsis; /* Add an ellipsis if the text overflows */
+    border-radius: 30px; /* Rounded corners */
+    /*font-size: 1.3vw; /* Responsive font size based on viewport width */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    background-color: #3F4808; /* Example green background color */
+    color: #FFFFF0; /* Button text color */
+    border: none; /* No border */
+    cursor: pointer; /* Cursor indicates clickable item */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds a shadow effect */
+}
+
+button:hover {
+    background-color: #8A9B6E; /* Darker shade for hover state */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
+}
+
 /*HEADER STYLE*/
 
 header {
@@ -92,6 +119,7 @@ main h1{
 section {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 75%;
     margin: 2rem auto; /* top and bottom | left and right */
 }
@@ -103,10 +131,18 @@ section {
     color: #FFFFF0;
 }
 
+
 .image-article {
-    flex: 1; /* Adjust as necessary for your layout */
-    margin-right: 20px; /* Spacing between the image and the text */
     position: relative; /* Set the parent to relative positioning */
+    display: flex;
+    flex: 0;
+    margin: 0 20px 0 0;
+    padding: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 400px; /* Fixed height for all cards */
+    flex-basis: calc(33.333% - 20px);
+    min-width: 250px; /* Set a min-width to prevent cards from getting too small */
 }
 
 .text-article {
@@ -115,9 +151,9 @@ section {
 }
 
 .image-article img {
+    display: flex;
     width: 100%; /* Make sure the image is not bigger than its container */
     height: auto; /* Maintain aspect ratio */
-    display: block; /* Remove bottom space/margin */
 }
 
 .top-button {
@@ -126,6 +162,24 @@ section {
     left: 50%; /* Center horizontally relative to the image */
     transform: translateX(-50%); /* Align the center of the button with the center of the image */
     width: 80%; /* Percentage of parent's width, adjust as needed */
+}
+
+/*Filter section*/
+
+.filter-section {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    gap: 10px; /* Space between buttons */
+}
+
+.filter-section button {
+    background-color: #8A9B6E; /* Initial background color */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.filter-section button.active {
+    background-color: #3F4808; /* Active state background color */
+    color: #FFFFF0; /* Active state text color */
 }
 
 /*Plant cards section*/
@@ -187,79 +241,59 @@ section {
     padding: 0;
 }
 
-/*Filter section*/
-
-.filter-section {
-    display: flex;
-    justify-content: center; /* Center the buttons */
-    gap: 10px; /* Space between buttons */
-}
-
-.filter-section button {
-    background-color: #8A9B6E; /* Initial background color */
-    transition: background-color 0.3s; /* Smooth transition for background color */
-}
-
-.filter-section button.active {
-    background-color: #3F4808; /* Active state background color */
-    color: #FFFFF0; /* Active state text color */
-}
-
-
 /* Style for the info-section */
+
+.plant-info{
+    display: flex;
+    flex-direction: column;
+}
+
 .info-section {
     display: flex;
+    flex-direction: row;
+    gap: 1%;
     justify-content: space-between;
-    margin: 20px 0; /* Adjust the margin as needed */
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    min-width: 380px; /* Set a min-width to prevent cards from getting too small */
+}
+
+.info-section h2, .info-section p {
+    margin: 0;
+    padding: 0;
 }
 
 .info-block {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 5px;
+    box-sizing: border-box;
     background: #8A9B6E;
-    flex-basis: 48%; /* Adjust width to create space between the blocks */
-    padding: 20px;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    border-radius: 20px; /* Rounded corners */
     color: #FFFFF0;
+    flex-basis: 49%;
+    min-width: 380px; /* Set a min-width to prevent cards from getting too small */
+    margin-bottom: 2rem;
 }
 
 /* Style for the chat-section */
 .chat-section {
+    display: flex;
+    justify-content: center;
     background: #8A9B6E;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin: 20px 0;
+    border-radius: 20px; /* Rounded corners */
+    color: #FFFFF0;
+    margin-top: 0;
+    height: 200px;
+    min-width: 380px; /* Set a min-width to prevent cards from getting too small */
 }
 
 .chat-section h1 {
-    color: #FFFFF0;
-    padding: 20px 0;
-    margin: 0;
+    margin: 10px;
 }
 
-/*GENERAL BUTTON STYLE*/
+/*Add plant form*/
 
-button {
-    max-width: 300px; /* Maximum width of the button */
-    min-width: 150px; /* Minimum width of the button */
-    padding: 1vw; /* Responsive vertical padding based on viewport width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    text-align: center; /* Center the text inside the button */
-    white-space: normal; /* Allow the text to wrap if needed */
-    overflow: hidden; /* Prevent text from spilling out */
-    text-overflow: ellipsis; /* Add an ellipsis if the text overflows */
-    border-radius: 30px; /* Rounded corners */
-    font-size: 1.3vw; /* Responsive font size based on viewport width */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
-    background-color: #3F4808; /* Example green background color */
-    color: #FFFFF0; /* Button text color */
-    border: none; /* No border */
-    cursor: pointer; /* Cursor indicates clickable item */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds a shadow effect */
-}
 
-button:hover {
-    background-color: #8A9B6E; /* Darker shade for hover state */
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
-}
+
