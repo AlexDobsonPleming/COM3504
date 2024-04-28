@@ -1,11 +1,3 @@
-<html>
-<head>
-
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style2.css'/>
-
-</head>
-<body>
 <h1><%= title %></h1>
 <p>Plant</p>
 <form action="/add" method="POST" enctype="multipart/form-data">
@@ -76,10 +68,11 @@
     <label for="plantColour">Plant Colour :</label>
     <input type="color" id="plantColour" name="plant_colour" value = "#07a639" required><br><br>
 
+    <label for="flowerColour">Flower Colour :</label>
+    <input type="color" id="flowerColour" name="flower_colour" value = "#07a639" required><br><br>
+
     <label for="myImage">Image:</label>
     <input type="file" id="myImage" name="myImg" accept="image/*" required><br><br>
 
     <button type="submit">Submit</button>
 </form>
-</body>
-</html>
