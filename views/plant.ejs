@@ -1,4 +1,6 @@
 <script type="module" src="/javascripts/fill_out_plant_page.mjs"></script>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
 <div class="background-section">
     <section class="welcome-section">
         <article class="image-article">
@@ -32,7 +34,19 @@
     </section>
 
     <section class="chat-section">
-        <h1>CHAT</h1>
+
         <!-- Chat content will go here -->
+        <script>
+            const socket = io();
+        </script>
+        <div>
+            <h1>CHAT</h1>
+            <ul id="messages"></ul>
+            <form id="form" action="">
+                <input id="input" autocomplete="off" /><button>Send</button>
+            </form>
+        </div>
+
+
     </section>
 </div>
