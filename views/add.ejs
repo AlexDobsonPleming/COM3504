@@ -105,14 +105,19 @@
     {
         navigator.geolocation.getCurrentPosition(function(position)
         {
-            var coordinates = position.coords;
+            const coordinates = position.coords;
             document.getElementById('latitude').value = coordinates.latitude;
             document.getElementById('longitude').value = coordinates.longitude;
         });
     }
 
+    function setDateToCurrent() {
+        document.getElementById("dateTime").value = new Date(Date.now()).toISOString().split(".")[0];
+    }
+
     function setDefaultValues() {
         setLatLongToCurrent();
+        setDateToCurrent();
     }
     document.addEventListener('DOMContentLoaded', setDefaultValues);
 </script>
