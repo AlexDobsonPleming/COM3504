@@ -1,6 +1,7 @@
-<script src="/javascripts/image_preview.mjs"></script>
+<script type="module" src="/javascripts/image_preview.mjs"></script>
+<script type="module" src="/javascripts/form_submission.mjs"></script>
 
-<form class="plant-form" action="/add" method="POST" enctype="multipart/form-data">
+<form class="plant-form" id="addPlantForm" enctype="multipart/form-data">
     <div class="first-container">
         <fieldset class="image-section">
             <legend>Plant Image</legend>
@@ -41,7 +42,7 @@
             <label for="longitude">Longitude:</label>
             <input type="number" id="longitude" name="longitude" step="any" required>
 
-            <button type="button" onclick="getLocation();">Get Location</button>
+            <button type="button" onclick="setLatLongToCurrent();">Get Location</button>
         </fieldset>
 
 
@@ -93,14 +94,14 @@
         </fieldset>
     </div>
     <div class="submit-button">
-        <button type="submit">Add Plant</button>
+        <button id="addPlantButton">Add Plant</button>
     </div>
 
 
 </form>
 
 <script>
-    function getLocation()
+    function setLatLongToCurrent()
     {
         navigator.geolocation.getCurrentPosition(function(position)
         {
@@ -109,4 +110,9 @@
             document.getElementById('longitude').value = coordinates.longitude;
         });
     }
+
+    function setDefaultValues() {
+        setLatLongToCurrent();
+    }
+    document.addEventListener('DOMContentLoaded', setDefaultValues);
 </script>

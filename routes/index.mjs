@@ -17,7 +17,7 @@ router.get('/plant/:plant_id', function(req, res, next) {
 });
 
 router.get('/add', function(req, res, next) {
-  res.render('addplant', { title: 'Add Plants' });
+  res.render('add', { title: 'Add Plants' });
 });
 
 router.post('/add', upload.single('myImg'), function (req, res, next) {
