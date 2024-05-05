@@ -112,7 +112,7 @@
     }
 
     function setDateToCurrent() {
-        document.getElementById("dateTime").value = new Date(Date.now()).toISOString().split(".")[0];
+        document.getElementById("dateTime").value = new Date(Date.now()).toISOString().split(".")[0].slice(0, -3);
     }
 
     function setDefaultValues() {
