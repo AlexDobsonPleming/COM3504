@@ -49,10 +49,10 @@
         <fieldset class="characteristics-section">
             <legend>Plant Characteristics</legend>
             <label for="plantWidth">Plant Width:</label>
-            <input type="number" id="plantWidth" name="plant_width" required>
+            <input type="number" id="plantWidth" name="plant_width">
 
             <label for="plantHeight">Plant Height:</label>
-            <input type="number" id="plantHeight" name="plant_height" required>
+            <input type="number" id="plantHeight" name="plant_height">
 
             <div class="label-input-container">
                 <label for="hasFlowers">Has Flowers:</label>
@@ -83,22 +83,22 @@
 
             <div class="label-input-container">
                 <label for="plantColour">Plant Colour:</label>
-                <input type="color" id="plantColour" name="plant_colour" value="#07a639" required>
+                <input type="color" id="plantColour" name="plant_colour" value="#07a639">
             </div>
 
             <div class="label-input-container">
                 <label for="flowerColour">Flower Colour:</label>
-                <input type="color" id="flowerColour" name="flower_colour" value="#07a639" required>
+                <input type="color" id="flowerColour" name="flower_colour" value="#07a639">
             </div>
 
         </fieldset>
     </div>
     <div class="submit-button">
-        <button id="addPlantButton">Add Plant</button>
+        <button type="button" id="addPlantButton">Add Plant</button>
     </div>
-
-
 </form>
+
+
 
 <script>
     function setLatLongToCurrent()
