@@ -34,16 +34,16 @@ async function submitForm() {
     const plantHeight = plantHeightField.value;
 
     const hasFlowersField = document.getElementById("hasFlowers");
-    const hasFlowers = hasFlowersField.value;
+    const hasFlowers = hasFlowersField.checked;
 
     const hasLeavesField = document.getElementById("hasLeaves");
-    const hasLeaves = hasLeavesField.value;
+    const hasLeaves = hasLeavesField.checked;
 
     const hasFruitField = document.getElementById("hasFruit");
-    const hasFruit = hasFruitField.value;
+    const hasFruit = hasFruitField.checked;
 
     const hasSeedsField = document.getElementById("hasSeeds");
-    const hasSeeds = hasSeedsField.value;
+    const hasSeeds = hasSeedsField.checked;
 
     const sunExposureField = document.getElementById("sunExposure");
     const sunExposure = sunExposureField.value;
@@ -74,11 +74,14 @@ async function submitForm() {
         img_base64: image
     }
 
-    await fetch("/add", {
+    const response = await fetch("/API/plant", {
         method: "POST",
-        body: plant,
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        body: JSON.stringify(plant)
     })
+
+    document.location.href = "/";
 }
 
-const addPlantForm = document.getElementById("addPlantForm");
-addPlantForm.onsubmit = async (_) => {await submitForm()};
+const addPlantButton = document.getElementById("addPlantButton");
+addPlantButton.onclick = async (_) => {await submitForm()};

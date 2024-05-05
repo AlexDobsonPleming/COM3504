@@ -20,7 +20,7 @@ router.get('/add', function(req, res, next) {
   res.render('add', { title: 'Add Plants' });
 });
 
-router.post('/add', upload.single('myImg'), function (req, res, next) {
+router.post('/API/plant', upload.single('myImg'), function (req, res, next) {
   let {
       user_name,
       plant_name,
@@ -38,31 +38,42 @@ router.post('/add', upload.single('myImg'), function (req, res, next) {
       sun_exposure,
       plant_colour,
       flower_colour,
+      img_base64
   } = req.body;
-  var imageBase64 = req.file.buffer.toString("base64");
+
+    const hexToRgb = (hex) => {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : undefined;
+    }
 
   const newPlant = new Plant({
         user_name: user_name,
         plant_name: plant_name,
         identify_status: identify_status,
         description: description,
-        date_time_seen: date_time_seen,
+        date_time_seen: new Date(date_time_seen),
         plant_width: plant_width,
         plant_height: plant_height,
         plant_location: {lat: latitude, long: longitude },
         has_flowers: has_flowers,
         has_fruit: has_fruit,
         has_seeds: has_seeds,
+        has_leaves: has_leaves,
         sun_exposure: sun_exposure,
-        plant_colour: {r: 1, g: 50, b: 32},
-        flower_colour: {r: 162, g: 162, b: 208},
+        plant_colour: hexToRgb(plant_colour),
+        flower_colour: hexToRgb(flower_colour),
         comments: [],
-        img: `data:image/jpeg;base64,${imageBase64}`
+        img: img_base64
     })
 
   newPlant.save();
-  res.redirect('/');
 });
+
+
 
 
 router.get('/API/plants', async function(req, res) {

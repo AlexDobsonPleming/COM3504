@@ -1,4 +1,3 @@
-
 import createError from "http-errors";
 import express from "express";
 import expressLayouts from "express-ejs-layouts";
@@ -27,6 +26,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/public/images/uploads', express.static(path.join(__dirname, '/public/images/uploads')));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

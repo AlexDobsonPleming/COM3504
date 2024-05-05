@@ -10,12 +10,12 @@ let PlantSchema = new Schema(
         // Define the plant_name field with type String, not required,
         // and max length of 200 characters
         user_name: { type: String, required: true, max: 50},
-        plant_name: { type: String, required: false, max: 200 },
+        plant_name: { type: String, required: true, max: 200 },
         // Define the status field with type enum, required,
         // and max length of 100 characters
         identify_status: {type: String, enum: ['Completed','In-Progress']},
 
-        description: { type: String, required: true, max: 500 },
+        description: { type: String, max: 500 },
 
         date_time_seen: { type: Date },
 
