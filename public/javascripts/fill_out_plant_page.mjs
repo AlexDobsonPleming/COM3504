@@ -1,5 +1,5 @@
 import {createMapEmbed, dateTimeSeenText} from "./create_plant_elements.mjs";
-import {getPlant, reloadPlants} from "./database.mjs";
+import {getPlant} from "./database/server_plants.mjs";
 function assignCheckbox(paragraph, checkStatus) {
 
     const input = document.createElement("input");

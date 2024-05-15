@@ -1,5 +1,5 @@
 "use strict";
-import {reloadPlants, getPlants} from "./database.mjs";
+import {reloadPlants, getPlants} from "./database/server_plants.mjs";
 import {createPlantImage, dateTimeSeenText, createMapEmbed} from "./create_plant_elements.mjs";
 
 
