@@ -3,6 +3,7 @@ import {reloadPlants} from "./database/server_plants.mjs";
 import { getPlants } from "./database/combined_plants.mjs";
 import {createPlantImage, dateTimeSeenText, createMapEmbed} from "./create_plant_elements.mjs";
 import { attemptUploadOfQueuedPlants } from "./database/synchronisation.mjs";
+import {getUsername} from "./username.mjs";
 
 
 function createPlantName(plantData) {
@@ -57,6 +58,14 @@ function createPlantCard(plantData) {
 
     const plantName = createPlantName(plantData);
     cardContent.appendChild(plantName);
+
+    if (plantData.user_name == getUsername()){
+        const isYours = document.createElement("p");
+        isYours.innerText = "You created this";
+        cardContent.appendChild(isYours);
+
+        cardContent.classList.add("owned");
+    }
 
     if (plantData.is_queued){
         const isQueued = document.createElement("p");

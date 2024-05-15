@@ -1,5 +1,6 @@
 import {createMapEmbed, dateTimeSeenText} from "./create_plant_elements.mjs";
 import {getPlant} from "./database/combined_plants.mjs";
+import {getUsername} from "./username.mjs";
 function assignCheckbox(paragraph, checkStatus) {
 
     const input = document.createElement("input");
@@ -25,6 +26,11 @@ function setValuesOnPlantPage(plantData) {
     }
     plant_name.innerText = name_to_set;
 
+    if (plantData.user_name == getUsername()){
+        const isYours = document.createElement("p");
+        isYours.innerText = "You created this";
+        plant_name.after(isYours);
+    }
 
     const identification_status = document.getElementById("plant_identification_status");
     identification_status.innerText = plantData.identify_status;

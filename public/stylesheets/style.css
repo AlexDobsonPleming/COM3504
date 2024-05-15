@@ -181,8 +181,12 @@ section {
     width: 100%;
 }
 
-.queued {
+.owned {
     background: #8A9B6E;
+}
+
+.queued {
+    background: #A6AC94FF;
 }
 
 .card:hover {
