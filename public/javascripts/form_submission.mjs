@@ -1,5 +1,6 @@
 import { getImageAsBase64 } from "./form_interactivity_common.mjs";
 import {addPlant} from "./database/queued_plants.mjs";
+import {getUsername} from "./username.mjs";
 
 async function submitForm() {
     const imageField = document.getElementById("myImage");
@@ -92,6 +93,31 @@ async function submitForm() {
 
     document.location.href = "/";
 }
+
+function setLatLongToCurrent()
+{
+    navigator.geolocation.getCurrentPosition(function(position)
+    {
+        const coordinates = position.coords;
+        document.getElementById('latitude').value = coordinates.latitude;
+        document.getElementById('longitude').value = coordinates.longitude;
+    });
+}
+
+function setDateToCurrent() {
+    document.getElementById("dateTime").value = new Date(Date.now()).toISOString().split(".")[0].slice(0, -3);
+}
+
+function setUsernameToCurrent() {
+    document.getElementById("userName").value = getUsername();
+}
+function setDefaultValues() {
+    setLatLongToCurrent();
+    setDateToCurrent();
+    setUsernameToCurrent();
+}
+
+document.addEventListener('DOMContentLoaded', setDefaultValues);
 
 const addPlantButton = document.getElementById("addPlantButton");
 addPlantButton.onclick = async (_) => {await submitForm()};
