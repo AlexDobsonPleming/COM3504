@@ -4,14 +4,23 @@ const cacheName = 'cache-v1';
 const precacheResources = [
     "/",
     "/add",
+    "/javascripts/database/database.mjs",
+    "/javascripts/database/combined_plants.mjs",
+    "/javascripts/database/queued_plants.mjs",
+    "/javascripts/database/server_plants.mjs",
+    "/javascripts/database/synchronisation.mjs",
     "/javascripts/create_plant_elements.mjs",
-    "/javascripts/database.mjs",
     "/javascripts/fill_out_plant_page.mjs",
     "/javascripts/filter.mjs",
+    "/javascripts/form_interactivity_common.mjs",
+    "/javascripts/form_submission.mjs",
     "/javascripts/image_preview.mjs",
     "/javascripts/index.js",
     "/javascripts/list_plants.mjs",
+    "/javascripts/offline_status.mjs",
+    "/javascripts/register_service_worker.mjs",
     "/javascripts/search.mjs",
+    "/service-worker.js",
     "/stylesheets/style.css",
     "/stylesheets/style2.css",
     "/images/background.jpg",
@@ -23,8 +32,7 @@ const precacheResources = [
     "/images/plant-image.png",
     "/images/potted-plants.png",
     "/manifest.json",
-    "/API/plants",
-    "/service-worker.js"
+    "/API/plants"
 ];
 
 

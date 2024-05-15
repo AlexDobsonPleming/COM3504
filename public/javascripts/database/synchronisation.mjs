@@ -4,37 +4,39 @@ export async function attemptUploadOfQueuedPlants() {
 
     const plantUploadEndpoint = "/API/plant";
     const plantsAndUploadStatus = queuedPlants.map(async plant => {
-        await fetch(plantUploadEndpoint, {
+        // try {
+        const response = await fetch(plantUploadEndpoint, {
             method: "POST",
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
             body: JSON.stringify(plant)
-        }).then((response) => {
-            // client/server error has occured
-            if (response.status >= 400 && response.status < 600) {
-                return {
-                    plant: plant,
-                    uploadSuccessful: false
-                };
-            }
-            return response;
-        }).then((returnedResponse) => {
-            //happy path
-            return {
-                plant: plant,
-                uploadSuccessful: true
-            };
-        }).catch((error) => {
-            // network error has occurred
+        });
+
+        if (response.status >= 400 && response.status < 600) {
             return {
                 plant: plant,
                 uploadSuccessful: false
             };
-        });
+        }
 
-        await Promise.all(plantsAndUploadStatus);
-
-        const plantsSucessfullyUploaded = plantsAndUploadStatus.filter(x => x.uploadSuccessful).forEach(async plant => {
-            await removePlant(plant);
+        const success = ({
+            plant: plant,
+            uploadSuccessful: true
         });
-    })
+        return success;
+        // } catch (error) {
+        //     return {
+        //         plant: plant,
+        //         uploadSuccessful: false
+        //     };
+        // }
+    });
+
+
+    const awaitedPlantsAndUploadStatus = await Promise.all(plantsAndUploadStatus);
+
+    const plantsSucessfullyUploaded = awaitedPlantsAndUploadStatus.filter(x => x.uploadSuccessful);
+
+    plantsSucessfullyUploaded.forEach(async plantStatus => {
+        await removePlant(plantStatus.plant);
+    });
 }
