@@ -23,7 +23,7 @@ const precacheResources = [
     "/images/plant-image.png",
     "/images/potted-plants.png",
     "/manifest.json",
-    // "/API/plants",
+    "/API/plants",
     "/service-worker.js"
 ];
 
@@ -40,13 +40,31 @@ self.addEventListener('activate', (event) => {
 
 // When there's an incoming fetch request, try and respond with a precached resource, otherwise fall back to the network
 self.addEventListener('fetch', (event) => {
+    console.log('Fetch requested for for:', event.request.url);
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            if (cachedResponse) {
-                console.log('Fetch intercepted for:', event.request.url);
-                return cachedResponse;
+        caches.match(event.request).then(async (cachedResponse) => {
+            try {
+                const response = await fetch(event.request);
+
+                if (!response.ok) {
+                    tryUseCache(cachedResponse);
+                } else {
+                    return response;
+                }
+
+            } catch (error) {
+                console.log("There has been a problem with your fetch operation:");
+                return tryUseCache(cachedResponse);
             }
-            return fetch(event.request);
         }),
     );
 });
+
+function tryUseCache(cachedResponse) {
+    if (cachedResponse) {
+        console.log('Fetch intercepted for:', cachedResponse.url);
+        return cachedResponse;
+    } else {
+        console.log("could not find item in cache")
+    }
+}
