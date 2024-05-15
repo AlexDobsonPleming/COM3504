@@ -1,4 +1,5 @@
 import { getImageAsBase64 } from "./form_interactivity_common.mjs";
+import {addPlant} from "./database/queued_plants.mjs";
 
 async function submitForm() {
     const imageField = document.getElementById("myImage");
@@ -19,7 +20,7 @@ async function submitForm() {
     const identificationStatus = identifyStatusField.value;
 
     const dateAndTimeSeenField = document.getElementById("dateTime");
-    const dateAndTimeSeen = dateAndTimeSeenField.value;
+    const dateAndTimeSeen = new Date(dateAndTimeSeenField.value);
 
     const latitudeField = document.getElementById("latitude");
     const latitude = latitudeField.value;
@@ -54,6 +55,17 @@ async function submitForm() {
     const flowerColourField = document.getElementById("flowerColour");
     const flowerColour = flowerColourField.value;
 
+    const hexToRgb = (hex) => {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : undefined;
+    }
+    const plantColourRgb = hexToRgb(plantColour);
+    const flowerColourRgb = hexToRgb(flowerColour);
+
     const plant = {
         user_name: userName,
         plant_name: plantName,
@@ -62,23 +74,21 @@ async function submitForm() {
         date_time_seen: dateAndTimeSeen,
         plant_width: plantWidth,
         plant_height: plantHeight,
-        latitude: longitude,
-        longitude: latitude,
+        plant_location: {
+            lat: latitude,
+            long: longitude
+        },
         has_flowers: hasFlowers,
         has_leaves: hasLeaves,
         has_fruit: hasFruit,
         has_seeds: hasSeeds,
         sun_exposure: sunExposure,
-        plant_colour: plantColour,
-        flower_colour: flowerColour,
-        img_base64: image
+        plant_colour: plantColourRgb,
+        flower_colour: flowerColourRgb,
+        img: image
     }
 
-    const response = await fetch("/API/plant", {
-        method: "POST",
-        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-        body: JSON.stringify(plant)
-    })
+    await addPlant(plant);
 
     document.location.href = "/";
 }

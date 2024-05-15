@@ -110,8 +110,15 @@ class ObjectStoreHandler {
     })
 
     add = async (newPlant) => new Promise(async (resolve, reject) => {
-        const plantStore = await this.getStore();
+        const plantStore = await this.getStore(TransactionMode.READ_WRITE);
         const addRequest = plantStore.add(newPlant);
+        addRequest.onsuccess = resolve;
+        addRequest.onerror = reject;
+    });
+
+    remove = async (plantToRemove) => new Promise(async (resolve, reject) => {
+        const plantStore = await this.getStore();
+        const addRequest = plantStore.delete(newPlant._id);
         addRequest.onsuccess = resolve;
         addRequest.onerror = reject;
     });
@@ -137,6 +144,7 @@ class ObjectStoreHandler {
         transactionInPlantStore.onComplete = resolve;
         transactionInPlantStore.onError = reject;
     });
+
 }
 
 

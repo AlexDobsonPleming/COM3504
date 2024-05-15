@@ -29,8 +29,7 @@ router.post('/API/plant', upload.single('myImg'), function (req, res, next) {
       date_time_seen,
       plant_width,
       plant_height,
-      latitude,
-      longitude,
+      plant_location,
       has_flowers,
       has_leaves,
       has_fruit,
@@ -41,14 +40,7 @@ router.post('/API/plant', upload.single('myImg'), function (req, res, next) {
       img_base64
   } = req.body;
 
-    const hexToRgb = (hex) => {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : undefined;
-    }
+
 
   const newPlant = new Plant({
         user_name: user_name,
@@ -58,14 +50,14 @@ router.post('/API/plant', upload.single('myImg'), function (req, res, next) {
         date_time_seen: new Date(date_time_seen),
         plant_width: plant_width,
         plant_height: plant_height,
-        plant_location: {lat: latitude, long: longitude },
+        plant_location: plant_location,
         has_flowers: has_flowers,
         has_fruit: has_fruit,
         has_seeds: has_seeds,
         has_leaves: has_leaves,
         sun_exposure: sun_exposure,
-        plant_colour: hexToRgb(plant_colour),
-        flower_colour: hexToRgb(flower_colour),
+        plant_colour: plant_colour,
+        flower_colour: flower_colour,
         comments: [],
         img: img_base64
     })

@@ -1,7 +1,8 @@
 "use strict";
-import {reloadPlants, getPlants} from "./database/server_plants.mjs";
+import {reloadPlants} from "./database/server_plants.mjs";
+import { getPlants } from "./database/combined_plants.mjs";
 import {createPlantImage, dateTimeSeenText, createMapEmbed} from "./create_plant_elements.mjs";
-
+import { attemptUploadOfQueuedPlants } from "./database/synchronisation.mjs";
 
 
 function createPlantName(plantData) {
@@ -92,6 +93,8 @@ async function load_page() {
     const plant_elements = plants
         .map(plant => createPlantCard(plant));
     plant_elements.forEach(plantElement => rootListElement.appendChild(plantElement));
+
+    await attemptUploadOfQueuedPlants();
 }
 
 window.onload = load_page;
