@@ -1,5 +1,5 @@
 import {createMapEmbed, dateTimeSeenText} from "./create_plant_elements.mjs";
-import {getPlant} from "./database/server_plants.mjs";
+import {getPlant} from "./database/combined_plants.mjs";
 function assignCheckbox(paragraph, checkStatus) {
 
     const input = document.createElement("input");
@@ -19,7 +19,12 @@ function createColouredText(text, colour) {
 function setValuesOnPlantPage(plantData) {
 
     const plant_name = document.getElementById("plant_name");
-    plant_name.innerText = plantData.plant_name;
+    let name_to_set = plantData.plant_name;
+    if (plantData.is_queued) {
+        name_to_set = `${name_to_set} (queued for upload)`;
+    }
+    plant_name.innerText = name_to_set;
+
 
     const identification_status = document.getElementById("plant_identification_status");
     identification_status.innerText = plantData.identify_status;

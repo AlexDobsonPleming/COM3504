@@ -58,6 +58,14 @@ function createPlantCard(plantData) {
     const plantName = createPlantName(plantData);
     cardContent.appendChild(plantName);
 
+    if (plantData.is_queued){
+        const isQueued = document.createElement("p");
+        isQueued.innerText = "Queued for upload";
+        cardContent.appendChild(isQueued);
+
+        cardContent.classList.add("queued");
+    }
+
     const plantIdentificationStatus = createPlantIdentificationStatus(plantData);
     cardContent.appendChild(plantIdentificationStatus);
 
@@ -75,14 +83,21 @@ function createPlantCard(plantData) {
 
 
 async function load_page() {
-    const apiPlants = await (await fetch("API/plants")).json();
+    try {
+        const apiPlants = await (await fetch("API/plants")).json();
 
-    apiPlants.forEach(plant => {
-        //fix mongodb stringifying my dates
-        plant.date_time_seen = new Date(plant.date_time_seen);
-    })
+        apiPlants.forEach(plant => {
+            //fix mongodb stringifying my dates
+            plant.date_time_seen = new Date(plant.date_time_seen);
+        })
 
-    await reloadPlants(apiPlants);
+        await reloadPlants(apiPlants);
+
+    } catch (exception) {
+
+    }
+
+
     const plants = await getPlants();
 
     const plantCountElement = document.getElementById('plantEntriesCount');

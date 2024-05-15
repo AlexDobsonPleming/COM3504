@@ -16,6 +16,11 @@ router.get('/plant/:plant_id', function(req, res, next) {
     res.render('plant', { title: 'Plant Page' });
 });
 
+//render default page so service worker can pick it up
+router.get('/plant', function(req, res, next) {
+    res.render('plant', { title: 'Plant Page' });
+});
+
 router.get('/add', function(req, res, next) {
   res.render('add', { title: 'Add Plants' });
 });

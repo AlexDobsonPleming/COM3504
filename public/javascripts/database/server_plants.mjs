@@ -4,11 +4,17 @@ const server_plants_store_name = "server_plants";
 const plantHandler = new ObjectStoreHandler(server_plants_store_name);
 
 export async function getPlants() {
-    return await plantHandler.getAll();
+    const allPlants = await plantHandler.getAll();
+    allPlants.forEach(plant => plant.is_queued = false);
+    return allPlants;
 }
 
 export async function getPlant(plantId) {
-    return await plantHandler.get(plantId);
+    const plant = await plantHandler.get(plantId);
+    if (plant) {
+        plant.is_queued = false;
+    }
+    return plant;
 }
 
 export async function addPlant(newPlant) {
