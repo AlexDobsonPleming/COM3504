@@ -14,7 +14,7 @@ function createPlantName(plantData) {
 
 function createPlantIdentificationStatus(plantData) {
     const identificationStatus = document.createElement("p");
-    identificationStatus.textContent = `Identification status: ${plantData.identify_status}`;
+    identificationStatus.textContent = `Identification status: ${plantData.identify_status.status}`;
     return identificationStatus;
 }
 

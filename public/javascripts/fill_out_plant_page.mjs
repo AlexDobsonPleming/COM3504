@@ -1,6 +1,9 @@
 import {createMapEmbed, dateTimeSeenText} from "./create_plant_elements.mjs";
 import {getPlant} from "./database/combined_plants.mjs";
 import {getUsername} from "./username.mjs";
+import {updatePlant} from "./database/server_plants.mjs";
+
+let plant;
 function assignCheckbox(paragraph, checkStatus) {
 
     const input = document.createElement("input");
@@ -32,8 +35,9 @@ function setValuesOnPlantPage(plantData) {
         plant_name.after(isYours);
     }
 
-    const identification_status = document.getElementById("plant_identification_status");
-    identification_status.innerText = plantData.identify_status;
+    const identification_status = document.getElementById("identifyStatus");
+    identification_status.value = plantData.identify_status.status;
+    identification_status.addEventListener("change", identificationStatusChanged);
 
 
     const plantDescription = document.getElementById("plant_description");
@@ -84,12 +88,23 @@ function rgbToHex(colour) {
     return "#" + componentToHex(colour.r) + componentToHex(colour.g) + componentToHex(colour.b);
 }
 
+async function identificationStatusChanged() {
+    const identification_status_dropdown = document.getElementById("identifyStatus");
+    const identification_status = identification_status_dropdown.value;
+
+    plant.identify_status = {
+        status: identification_status,
+        time_updated: Date.now()
+    }
+    await updatePlant(plant);
+}
+
 async function load_page() {
     const href = window.location.href;
     const elements = href.split("/");
     const plant_id = elements[elements.length - 1];
 
-    const plant = await getPlant(plant_id);
+    plant = await getPlant(plant_id);
 
     setValuesOnPlantPage(plant);
 }

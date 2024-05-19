@@ -118,9 +118,18 @@ class ObjectStoreHandler {
 
     remove = async (plantToRemove) => new Promise(async (resolve, reject) => {
         const plantStore = await this.getStore(TransactionMode.READ_WRITE);
-        const addRequest = plantStore.delete(plantToRemove._id);
-        addRequest.onsuccess = resolve;
-        addRequest.onerror = reject;
+        const removeRequest = plantStore.delete(plantToRemove._id);
+        removeRequest.onsuccess = resolve;
+        removeRequest.onerror = reject;
+    });
+
+    update = async (plantToUpdate) => new Promise(async (resolve, reject) => {
+        const plantStore = await this.getStore(TransactionMode.READ_WRITE);
+
+        const updateRequest = plantStore.put(plantToUpdate);
+
+        updateRequest.onsubmit = resolve;
+        updateRequest.onerror = reject;
     });
 
     reload = async (newPlants) => new Promise(async (resolve, reject) => {

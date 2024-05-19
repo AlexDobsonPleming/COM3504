@@ -1,4 +1,11 @@
 import { getPlants, removePlant } from "./queued_plants.mjs";
+import {getPlantsFromAPI} from "../API/plants.mjs";
+
+export async function syncUpdateOfExistingPlants() {
+    const apiPlants = getPlantsFromAPI();
+
+
+}
 export async function attemptUploadOfQueuedPlants() {
     const queuedPlants = await getPlants();
 

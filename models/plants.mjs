@@ -13,7 +13,10 @@ let PlantSchema = new Schema(
         plant_name: { type: String, required: true, max: 200 },
         // Define the status field with type enum, required,
         // and max length of 100 characters
-        identify_status: {type: String, enum: ['Completed','In-Progress']},
+        identify_status: {
+                status: {type: String, enum: ['Completed','In-Progress']},
+                time_updated: Date
+        },
 
         description: { type: String, max: 500 },
 
@@ -39,7 +42,11 @@ let PlantSchema = new Schema(
 
         flower_colour: {r: Number, g: Number, b: Number},
 
-        comments: [{type: String }],
+        comments: [{
+                name: String,
+                message: String,
+                date_time_sent: Date
+        }],
 
         img: {type: String}
     }

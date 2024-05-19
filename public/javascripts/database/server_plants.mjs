@@ -21,6 +21,10 @@ export async function addPlant(newPlant) {
     return await plantHandler.add(newPlant);
 }
 
+export async function updatePlant(plantToUpdate) {
+    return await plantHandler.update(plantToUpdate);
+}
+
 export async function reloadPlants(newPlants) {
     return await plantHandler.reload(newPlants);
 }
