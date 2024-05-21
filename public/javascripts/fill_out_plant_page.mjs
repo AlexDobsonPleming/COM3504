@@ -17,6 +17,50 @@ function createColouredText(text, colour) {
     return plantColourElement;
 }
 
+function getDBPedia(plantName) {
+    // Construct the DBpedia resource URL based on the plant name
+    const resource = `http://dbpedia.org/resource/${encodeURIComponent(plantName)}`;
+
+    // DBpedia SPARQL endpoint URL
+    const endpointUrl = 'https://dbpedia.org/sparql';
+
+    // SPARQL query to retrieve abstract for the given resource (plant)
+    const sparqlQuery = `
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX dbo: <http://dbpedia.org/ontology/>
+
+        SELECT ?abstract
+        WHERE {
+            <${resource}> dbo:abstract ?abstract .
+            FILTER (langMatches(lang(?abstract), "en"))
+        }
+    `;
+
+    // Encode the query as a URL parameter
+    const encodedQuery = encodeURIComponent(sparqlQuery);
+
+    // Build the URL for the SPARQL query
+    const url = `${endpointUrl}?query=${encodedQuery}&format=json`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // The results are in the 'data' object
+            const bindings = data.results.bindings;
+            if (bindings.length > 0) {
+                const abstract = bindings[0].abstract.value;
+
+                // Insert the abstract into the element with the ID 'abstract'
+                const abstractElement = document.getElementById("plant_abstract");
+                abstractElement.textContent = abstract;
+            } else {
+                console.log('No abstract found for the plant');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching abstract from DBpedia:', error);
+        });
+}
 function setValuesOnPlantPage(plantData) {
 
     const plant_name = document.getElementById("plant_name");
@@ -73,6 +117,8 @@ function setValuesOnPlantPage(plantData) {
 
     const flower_colour = document.getElementById("flower_colour");
     flower_colour.appendChild(createColouredText(rgbToHex(plantData.flower_colour), plantData.flower_colour));
+
+    getDBPedia(plantData.plant_name)
 }
 
 function componentToHex(c) {
