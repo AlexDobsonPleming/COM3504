@@ -49,10 +49,12 @@ function getDBPedia(plantName) {
             const bindings = data.results.bindings;
             if (bindings.length > 0) {
                 const abstract = bindings[0].abstract.value;
-
                 // Insert the abstract into the element with the ID 'abstract'
                 const abstractElement = document.getElementById("plant_abstract");
                 abstractElement.textContent = abstract;
+
+                const uriElement = document.getElementById("db_link");
+                uriElement.textContent = resource;
             } else {
                 console.log('No abstract found for the plant');
             }
