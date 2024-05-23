@@ -35,7 +35,7 @@ function createPlantCard(plantData) {
     rootPlantLink.setAttributeNode(dateTimeAttribute);
 
     const identificationStatusAttribute= document.createAttribute("data-identification");
-    identificationStatusAttribute.value=plantData.identify_status;
+    identificationStatusAttribute.value=plantData.identify_status.status;
     rootPlantLink.setAttributeNode(identificationStatusAttribute);
 
     const latitudeAttribute= document.createAttribute("data-lat");

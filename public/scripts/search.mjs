@@ -16,6 +16,8 @@ const radioButtonIds = [
                     return 0;
                 } else if (idStatus === "In-Progress") {
                     return 1;
+                } else if (idStatus === "Unknown") {
+                    return 2;
                 }
             }
 
