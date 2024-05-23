@@ -8,7 +8,7 @@ function clearAllObjectStores(db) {
 }
 
 const openNewDb = () => new Promise((resolve, reject) => {
-    const requestIDB = indexedDB.open("plantsDB", 3);
+    const requestIDB = indexedDB.open("plantsDB", 4);
 
     // Function to handle IndexedDB upgrade
     const handleUpgrade = (ev) => {
