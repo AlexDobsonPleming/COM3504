@@ -27,6 +27,7 @@ router.get('/add', function(req, res, next) {
 
 router.post('/API/plant', upload.single('myImg'), function (req, res, next) {
       let {
+          _id,
           user_name,
           plant_name,
           description,
@@ -48,6 +49,7 @@ router.post('/API/plant', upload.single('myImg'), function (req, res, next) {
 
 
       const newPlant = new Plant({
+            _id: _id,
             user_name: user_name,
             plant_name: plant_name,
             identify_status: identify_status,
@@ -67,9 +69,8 @@ router.post('/API/plant', upload.single('myImg'), function (req, res, next) {
             img: img
         })
 
-    res.sendStatus(200);
-
-      newPlant.save();
+    newPlant.save();
+    res.send(newPlant);
 
 
 });

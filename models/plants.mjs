@@ -7,6 +7,8 @@ let Schema = mongoose.Schema;
 // Define the schema for the plant model
 let PlantSchema = new Schema(
     {
+        _id: { type: String, required: true },
+
         // Define the plant_name field with type String, not required,
         // and max length of 200 characters
         user_name: { type: String, required: true, max: 50},
@@ -49,7 +51,8 @@ let PlantSchema = new Schema(
         }],
 
         img: {type: String}
-    }
+    },
+    { _id: false }
 );
 
 // Configure the 'toObject' option for the schema to include getters

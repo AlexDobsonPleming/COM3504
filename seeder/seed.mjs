@@ -5,6 +5,7 @@ import {mongoose} from "../databases/plants.mjs";
 //create your array. i inserted only 1 object here
 const plants = [
     new Plant({
+        _id: "1",
         user_name: "hipper",
         plant_name: "Taraxacum_officinale",
         identify_status: { status: "Completed", time_updated: new Date(2007, 2, 15) },
@@ -46,6 +47,7 @@ const plants = [
         //</editor-fold>
     }),
     new Plant({
+        _id: "2",
         user_name: "eugen",
         plant_name: "Tulip",
         identify_status: { status: "In-Progress", time_updated: new Date(2013, 7, 25) },
@@ -72,6 +74,7 @@ const plants = [
         //</editor-fold>
     }),
     new Plant({
+        _id: "3",
         user_name: "Me",
         plant_name: "Mertensia",
         identify_status: { status: "Completed", time_updated: new Date(2022, 4, 18) },

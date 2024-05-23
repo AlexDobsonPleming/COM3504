@@ -1,7 +1,7 @@
 import {createMapEmbed, dateTimeSeenText} from "./create_plant_elements.mjs";
-import {getPlant} from "./database/combined_plants.mjs";
+import {getPlant} from "./database/client_plants.mjs";
 import {getUsername} from "./username.mjs";
-import {updatePlant} from "./database/server_plants.mjs";
+import {updatePlant} from "./database/client_plants.mjs";
 
 let plant;
 function assignCheckbox(paragraph, checkStatus) {

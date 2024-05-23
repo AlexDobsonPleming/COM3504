@@ -1,4 +1,3 @@
-import {reloadPlants} from "../database/server_plants.mjs";
 
 export async function getPlantsFromAPI() {
     try {

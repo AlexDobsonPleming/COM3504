@@ -21,11 +21,7 @@ const openNewDb = () => new Promise((resolve, reject) => {
             // queued_plants is a client side queue of plants to upload
             // they have exactly the same structure, so they can be rendered using the same client render methods
             {
-                name: "server_plants",
-                keyPath: "_id"
-            },
-            {
-                name: "queued_plants",
+                name: "client_plants",
                 keyPath: "_id"
             }
         ];

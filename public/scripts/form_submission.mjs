@@ -1,5 +1,5 @@
 import { getImageAsBase64 } from "./form_interactivity_common.mjs";
-import {addPlant} from "./database/queued_plants.mjs";
+import {addPlant} from "./database/client_plants.mjs";
 import {getUsername} from "./username.mjs";
 
 async function submitForm() {
@@ -68,10 +68,11 @@ async function submitForm() {
     const flowerColourRgb = hexToRgb(flowerColour);
 
     const plant = {
+        _id: self.crypto.randomUUID(),
         user_name: userName,
         plant_name: plantName,
         description: plantDescription,
-        identify_status: identificationStatus,
+        identify_status: { status: identificationStatus, time_updated: Date.now() },
         date_time_seen: dateAndTimeSeen,
         plant_width: plantWidth,
         plant_height: plantHeight,
@@ -86,7 +87,8 @@ async function submitForm() {
         sun_exposure: sunExposure,
         plant_colour: plantColourRgb,
         flower_colour: flowerColourRgb,
-        img: image
+        img: image,
+        comments: []
     }
 
     await addPlant(plant);
