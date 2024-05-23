@@ -2,7 +2,8 @@ import {addPlant, getPlants, removePlant} from "./client_plants.mjs";
 import {getPlantsFromAPI} from "../API/plants.mjs";
 
 function comparePlantsForPatch(plantA, plantB) {
-    return plantA._id.valueOf() === plantB._id.valueOf();
+    return (plantA._id.valueOf() === plantB._id.valueOf()) &&
+        (plantA.identify_status.status.valueOf()  === plantB.identify_status.status.valueOf());
 }
 
 function comparePlantsForSync(plantA, plantB) {
