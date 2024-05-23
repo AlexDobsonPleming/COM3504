@@ -46,6 +46,18 @@ button:hover {
     background-color: #8A9B6E; /* Darker shade for hover state */
     box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
 }
+
+nav input {
+    width: 80px;
+}
+
+nav button {
+    padding: 0rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: fit-content;
+    min-width: 0rem;
+}
 /*HEADER STYLE*/
 header {
     background: #3F4808;
