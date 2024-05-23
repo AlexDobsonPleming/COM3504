@@ -12,8 +12,14 @@ router.get('/', function(req, res, next) {
     res.render('home', { title: 'Home Page' });
 });
 
+/* GET home page. */
+router.get('/chat', function(req, res, next) {
+    res.render('chat', { title: 'Chat' });
+});
+
 router.get('/plant/:plant_id', function(req, res, next) {
-    res.render('plant', { title: 'Plant Page' });
+    const plantId = req.params.plant_id;
+    res.render('plant', { title: 'Plant Page', plant_id: plantId });
 });
 
 //render default page so service worker can pick it up

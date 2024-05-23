@@ -16,7 +16,7 @@ let PlantSchema = new Schema(
         // Define the status field with type enum, required,
         // and max length of 100 characters
         identify_status: {
-                status: {type: String, enum: ['Completed','In-Progress']},
+                status: {type: String, enum: ['Completed','In-Progress', 'Unknown']},
                 time_updated: Date
         },
 

@@ -1,7 +1,6 @@
-let name = null;
-let roomNo = null;
+let username = null;
+let roomNo = new URLSearchParams(window.location.search).get('plant_id');  // This fetches the plant ID from the URL
 let socket = io();
-
 
 /**
  * called by <body onload>
@@ -15,7 +14,7 @@ function init() {
 
     // called when someone joins the room. If it is someone else it notifies the joining of the room
     socket.on('joined', function (room, userId) {
-        if (userId === name) {
+        if (userId === username) {
             // it enters the chat
             hideLoginInterface(room, userId);
         } else {
@@ -26,21 +25,12 @@ function init() {
     // called when a message is received
     socket.on('chat', function (room, userId, chatText) {
         let who = userId
-        if (userId === name) who = 'Me';
+        if (userId === username) who = 'Me';
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
     });
 
 }
 
-/**
- * called to generate a random room number
- * This is a simplification. A real world implementation would ask the server to generate a unique room number
- * so to make sure that the room number is not accidentally repeated across uses
- */
-function generateRoom() {
-    roomNo = Math.round(Math.random() * 10000);
-    document.getElementById('roomNo').value = 'R' + roomNo;
-}
 
 /**
  * called when the Send button is pressed. It gets the text to send from the interface
@@ -48,7 +38,7 @@ function generateRoom() {
  */
 function sendChatText() {
     let chatText = document.getElementById('chat_input').value;
-    socket.emit('chat', roomNo, name, chatText);
+    socket.emit('chat', roomNo, username, chatText);
 }
 
 /**
@@ -56,10 +46,9 @@ function sendChatText() {
  * interface
  */
 function connectToRoom() {
-    roomNo = document.getElementById('roomNo').value;
-    name = document.getElementById('name').value;
-    if (!name) name = 'Unknown-' + Math.random();
-    socket.emit('create or join', roomNo, name);
+    username = document.getElementById('username').value;
+    if (!username) username = 'Unknown-' + Math.random();
+    socket.emit('create or join', roomNo, username);
 }
 
 /**
@@ -85,4 +74,3 @@ function hideLoginInterface(room, userId) {
     document.getElementById('who_you_are').innerHTML= userId;
     document.getElementById('in_room').innerHTML= ' '+room;
 }
-

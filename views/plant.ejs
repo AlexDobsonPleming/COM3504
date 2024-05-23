@@ -1,58 +1,63 @@
-<script type="module" src="/scripts/fill_out_plant_page.mjs"></script>
-<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<body>
+<div class="wrapper">
+    <header>
+        <% include partials/header.ejs %>
+    </header>
 
-<div class="background-section">
-    <section class="welcome-section">
-        <article class="image-article">
-            <img id="plant_image" src="/images/cactus.jpeg" alt="Plant Profile Image">
-            <button class="top-button">Update status</button>
-        </article>
-        <article class="text-article">
-            <h1 id="plant_name">Plant name</h1>
-            <select id="identifyStatus" name="identify_status">
-                <option value="Completed">Completed</option>
-                <option value="In-Progress">In-Progress</option>
-                <option value="Unknown">Unknown</option>
-            </select>
-            <p id="plant_description">Proin ut vehicula elit. Phasellus ullamcorper vitae risus at sollicitudin. Aenean pretium magna ut interdum fringilla.</p>
-            <p id = "db_link">Discover more at: </p>
-            <p id="plant_abstract"> Abstract: </p>
-        </article>
-    </section>
+    <main>
+        <script type="module" src="/scripts/fill_out_plant_page.mjs"></script>
+        <div class="background-section">
+            <section class="welcome-section">
+                <article class="image-article">
+                    <img id="plant_image" src="/images/cactus.jpeg" alt="Plant Profile Image">
+                    <button class="top-button">Update status</button>
+                </article>
+                <article class="text-article">
+                    <h1 id="plant_name">Plant name</h1>
+                    <select id="identifyStatus" name="identify_status">
+                        <option value="Completed">Completed</option>
+                        <option value="In-Progress">In-Progress</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                    <p id="plant_description">Proin ut vehicula elit. Phasellus ullamcorper vitae risus at sollicitudin. Aenean pretium magna ut interdum fringilla.</p>
+                    <p id = "db_link">Discover more at: </p>
+                    <p id="plant_abstract"> Abstract: </p>
+                </article>
+            </section>
+        </div>
+
+        <div class="plant-info">
+            <section class="info-section">
+                <div class="info-block">
+                    <h2 id="date_time_seen">Date and time seen:</h2>
+                    <div id="map" class="map"></div>
+                </div>
+                <div class="info-block">
+                    <p id="width">Width:</p>
+                    <p id="height">Height:</p>
+                    <p id="has_flowers">Has flowers:</p>
+                    <p id="has_fruit">Has fruit:</p>
+                    <p id="has_seeds">Has seeds:</p>
+                    <p id="sun_exposure">Sun exposure:</p>
+                    <p id="plant_colour">Plant color:</p>
+                    <p id="flower_colour">Flower color:</p>
+                </div>
+            </section>
+            <section class="chat-section">
+                <button onclick="openChat('<%= plant_id %>')">Join the chat</button>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <% include partials/footer.ejs %>
+    </footer>
 </div>
 
-<div class="plant-info">
-    <section class="info-section">
-        <div class="info-block">
-            <h2 id="date_time_seen">Date and time seen:</h2>
-            <div id="map" class="map"></div>
-        </div>
-        <div class="info-block">
-            <p id="width">Width:</p>
-            <p id="height">Height:</p>
-            <p id="has_flowers">Has flowers:</p>
-            <p id="has_fruit">Has fruit:</p>
-            <p id="has_seeds">Has seeds:</p>
-            <p id="sun_exposure">Sun exposure:</p>
-            <p id="plant_colour">Plant color:</p>
-            <p id="flower_colour">Flower color:</p>
-        </div>
-    </section>
+<script>
+    function openChat(plantId) {
+        window.open(`/chat?plant_id=${plantId}`, '_blank');
+    }
+</script>
 
-    <section class="chat-section">
-
-        <!-- Chat content will go here -->
-        <script>
-            const socket = io();
-        </script>
-        <div>
-            <h1>CHAT</h1>
-            <ul id="messages"></ul>
-            <form id="form" action="">
-                <input id="input" autocomplete="off" /><button>Send</button>
-            </form>
-        </div>
-
-
-    </section>
-</div>
+</body>

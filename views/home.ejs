@@ -1,30 +1,43 @@
 <script type="module" src="/scripts/search.mjs"></script>
 <script type="module" src="/scripts/list_plants.mjs"></script>
 <script type="module" src="/scripts/filter.mjs"></script>
+<body>
+    <div class="wrapper">
+        <header>
+            <% include partials/header.ejs %>
+        </header>
 
-<div class="background-section">
-    <section class="welcome-section">
-            <article class="image-article">
-                <img src="/images/plant-image.png" alt="Plant Image">
-                <a href="/add" class="top-button-link">
-                    <button class="top-button">Add plant sighting!</button>
-                </a>
-            </article>
-            <article class="text-article">
-                <h1>WELCOME!</h1>
-                <p>Proin ut vehicula elit. Phasellus ullamcorper vitae risus at sollicitudin. Aenean pretium magna ut interdum fringilla.</p>
-                <h2 id="plantEntriesCount">Loading</h2>
-            </article>
-    </section>
-</div>
+        <main>
+            <div class="background-section">
+                <section class="welcome-section">
+                    <article class="image-article">
+                        <img src="/images/plant-image.png" alt="Plant Image">
+                        <a href="/add" class="top-button-link">
+                            <button class="top-button">Add plant sighting!</button>
+                        </a>
+                    </article>
+                    <article class="text-article">
+                        <h1>WELCOME!</h1>
+                        <p>Proin ut vehicula elit. Phasellus ullamcorper vitae risus at sollicitudin. Aenean pretium magna ut interdum fringilla.</p>
+                        <h2 id="plantEntriesCount">Loading</h2>
+                    </article>
+                </section>
+            </div>
 
-<section class="filter-section" id="searchPanel">
-    <button id="datetime">Date Time</button>
-    <button id="identification">Identification Status</button>
-    <button id="distance">Distance</button>
-</section>
+            <section class="filter-section" id="searchPanel">
+                <button id="datetime">Date Time</button>
+                <button id="identification">Identification Status</button>
+                <button id="distance">Distance</button>
+            </section>
 
 
-<section class="cards-container" id="searchResults">
+            <section class="cards-container" id="searchResults">
 
-</section>
+            </section>
+        </main>
+
+        <footer>
+            <% include partials/footer.ejs %>
+        </footer>
+    </div>
+</body>

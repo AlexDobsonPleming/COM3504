@@ -14,7 +14,7 @@ const precacheResources = [
     "/scripts/form_interactivity_common.mjs",
     "/scripts/form_submission.mjs",
     "/scripts/image_preview.mjs",
-    "/scripts/index.js",
+    "/scripts/chat.js",
     "/scripts/list_plants.mjs",
     "/scripts/search.mjs",
     "/stylesheets/style.css",
@@ -30,7 +30,6 @@ const precacheResources = [
     "/manifest.json"
 ];
 
-
 // When the service worker is installing, open the cache and add the precache resources to it
 self.addEventListener('install', (event) => {
     console.log('Service worker install event!');
@@ -39,20 +38,34 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
     console.log('Service worker activate event!');
+    event.waitUntil(
+        caches.keys().then(keyList => {
+            return Promise.all(keyList.map(key => {
+                if (key !== cacheName) {
+                    return caches.delete(key);
+                }
+            }));
+        })
+    );
+    return self.clients.claim();
 });
 
 // When there's an incoming fetch request, try and respond with a precached resource, otherwise fall back to the network
 self.addEventListener('fetch', (event) => {
+    // Bypass cache for Socket.io requests
+    if (event.request.url.includes('socket.io')) {
+        return fetch(event.request);
+    }
+
     let cacheMatchPattern = event.request;
 
     const url = event.request.url;
     const plantRegex = /.*\/plant\/.*/;
     if (plantRegex.test(url)) {
         const url_split = url.split("/");
-        const shortened_url =  url.replace("/" + url_split[url_split.length - 1], "")
+        const shortened_url = url.replace("/" + url_split[url_split.length - 1], "")
         cacheMatchPattern = shortened_url;
     }
-
 
     event.respondWith(
         caches.match(cacheMatchPattern).then(async (cachedResponse) => {
@@ -83,4 +96,5 @@ self.addEventListener('fetch', (event) => {
         }),
     );
 });
+
 

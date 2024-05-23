@@ -1,4 +1,3 @@
-
 const usernameKey = "username";
 
 export function getUsername() {
