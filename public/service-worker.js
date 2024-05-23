@@ -16,7 +16,6 @@ const precacheResources = [
     "/scripts/image_preview.mjs",
     "/scripts/index.js",
     "/scripts/list_plants.mjs",
-    "/scripts/offline_status.mjs",
     "/scripts/search.mjs",
     "/stylesheets/style.css",
     "/stylesheets/style2.css",
