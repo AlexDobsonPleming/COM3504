@@ -43,6 +43,7 @@ router.post('/chat', async function(req, res) {
     }
 });
 
+//GET route for individual plant page
 router.get('/plant/:plant_id', function(req, res, next) {
     const plantId = req.params.plant_id;
     res.render('plant', { title: 'Plant Page', plant_id: plantId });
@@ -53,6 +54,7 @@ router.get('/plant', function(req, res, next) {
     res.render('plant', { title: 'Plant Page' });
 });
 
+//GET route for displaying the page to add a new plant
 router.get('/add', function(req, res, next) {
   res.render('add', { title: 'Add Plants' });
 });

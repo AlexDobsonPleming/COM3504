@@ -12,6 +12,7 @@
 //     }
 // });
 
+//converts image to base64
 function getImageAsBase64(file) {
     const reader = new FileReader()
     return new Promise(resolve => {

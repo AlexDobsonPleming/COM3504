@@ -3,7 +3,7 @@
         <header>
             <% include partials/header.ejs %>
         </header>
-
+        <!-- Layout for the view of an individual plant, elements populated by fill_out_plant_page.mjs-->
         <main>
             <script type="module" src="/scripts/fill_out_plant_page.mjs"></script>
             <div class="background-section">
@@ -61,6 +61,7 @@
     </div>
 
     <script>
+        //opens the chat of the plant being viewed
         function openChat(plantId) {
             window.open(`/chat?plant_id=${plantId}`, '_blank');
         }

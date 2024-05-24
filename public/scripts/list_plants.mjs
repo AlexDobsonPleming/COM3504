@@ -4,19 +4,21 @@ import {createPlantImage, dateTimeSeenText, createMapEmbed} from "./create_plant
 import { synchronise_all } from "./database/synchronisation.mjs";
 import {getUsername} from "./username.mjs";
 
-
+//displays plant name
 function createPlantName(plantData) {
     const plantName = document.createElement("h2");
     plantName.textContent = plantData.plant_name;
     return plantName;
 }
 
+//displays id status
 function createPlantIdentificationStatus(plantData) {
     const identificationStatus = document.createElement("p");
     identificationStatus.textContent = `Identification status: ${plantData.identify_status.status}`;
     return identificationStatus;
 }
 
+//displays date and time plant was seen
 function createDateTimeSeen(date_time) {
     const plantDateTimeSeen = document.createElement("p");
     plantDateTimeSeen.textContent = dateTimeSeenText(date_time);
@@ -24,6 +26,7 @@ function createDateTimeSeen(date_time) {
     return plantDateTimeSeen;
 }
 
+//creates a 'card' containing the previously created elements
 function createPlantCard(plantData) {
     const rootPlantLink = document.createElement("a");
     rootPlantLink.href = `/plant/${plantData._id}`
@@ -89,7 +92,7 @@ function createPlantCard(plantData) {
     return rootPlantLink;
 }
 
-
+//loads the page
 async function load_page() {
     await synchronise_all();
 

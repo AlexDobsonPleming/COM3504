@@ -1,3 +1,4 @@
+//loops through buttons and sets relevant one to active when clicked
 document.addEventListener('DOMContentLoaded', (event) => {
     const filterButtons = document.querySelectorAll('.filter-section button');
 

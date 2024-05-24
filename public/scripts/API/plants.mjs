@@ -1,4 +1,4 @@
-
+//retrieves all plants
 export async function getPlantsFromAPI() {
     try {
         const apiPlants = await (await fetch("API/plants")).json();

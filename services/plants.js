@@ -1,4 +1,6 @@
 import Plant from "../models/plants.mjs";
+
+//retrieves all plants from db
 export async function get_all() {
     let existing_plants = await Plant.find({});
 

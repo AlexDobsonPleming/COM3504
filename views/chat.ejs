@@ -1,6 +1,7 @@
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="/scripts/index.js"></script>
 <body onload="init()">
+<!-- HTML to display the chat -->
 <div class="wrapper">
     <header>
         <% include partials/header.ejs %>
@@ -45,6 +46,7 @@
 <script>
     const usernameKey = "username";
 
+    //gets username of user
     function getUsername() {
         return localStorage.getItem(usernameKey);
     }
@@ -56,12 +58,14 @@
         }
     }
 
+    //sets username when button is clicked
     function setUsernameButtonClicked() {
         const usernameField = document.getElementById("username"); // This ID should match the username input field
         const usernameToSet = usernameField.value;
         localStorage.setItem(usernameKey, usernameToSet);
     }
 
+    //checks if user connects in a chat
     document.addEventListener("DOMContentLoaded", function(event) {
         fillUsernameField();
         const connectButton = document.getElementById("connect"); // Assuming you want to set username upon clicking connect

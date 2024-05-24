@@ -1,6 +1,6 @@
 import Plant from "../models/plants.mjs";
 import {mongoose} from "../databases/plants.mjs";
-
+//three plants made for seeding the database
 
 //create your array. i inserted only 1 object here
 const plants = [

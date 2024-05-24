@@ -4,6 +4,8 @@ import {getUsername} from "./username.mjs";
 import {updatePlant} from "./database/client_plants.mjs";
 
 let plant;
+
+//displays filled out checkboxes, used in has flowers, seed and fruit
 function assignCheckbox(paragraph, checkStatus) {
 
     const input = document.createElement("input");
@@ -13,6 +15,7 @@ function assignCheckbox(paragraph, checkStatus) {
     paragraph.appendChild(input);
 }
 
+//creates colour element for plant_colour
 function createColouredText(text, colour) {
     const plantColourElement = document.createElement("p");
     plantColourElement.textContent = text;
@@ -20,6 +23,7 @@ function createColouredText(text, colour) {
     return plantColourElement;
 }
 
+//queries dbpedia for plant information and adds to the elements
 function getDBPedia(plantName) {
     // Construct the DBpedia resource URL based on the plant name
     const resource = `http://dbpedia.org/resource/${encodeURIComponent(plantName)}`;
@@ -66,6 +70,8 @@ function getDBPedia(plantName) {
             console.error('Error fetching abstract from DBpedia:', error);
         });
 }
+
+//fills out the plant page with values from db
 function setValuesOnPlantPage(plantData) {
 
     const plant_name = document.getElementById("plant_name");
@@ -123,21 +129,24 @@ function setValuesOnPlantPage(plantData) {
 
     const flower_colour = document.getElementById("flower_colour");
     flower_colour.appendChild(createColouredText(rgbToHex(plantData.flower_colour), plantData.flower_colour));
-
+    //displays dbpedia info
     getDBPedia(plantData.plant_name)
 }
 
+//changes single colour to hexadecimal value
 function componentToHex(c) {
     const hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
 }
 
+//changes rgb to hexadecimal
 function rgbToHex(colour) {
     return "#" + componentToHex(colour.r) + componentToHex(colour.g) + componentToHex(colour.b);
 }
 
+//lets user that added plant to change the id status
 async function identificationStatusChanged() {
-    if (plant.user_name == getUsername()) {
+    if (plant.user_name == getUsername()) { //checks set username matches the one attached to the plant
         const identification_status_dropdown = document.getElementById("identifyStatus");
         const identification_status = identification_status_dropdown.value;
 
@@ -151,7 +160,7 @@ async function identificationStatusChanged() {
     }
 }
 
-// Function to handle the change name button click event
+// Function to handle the change name button click event, only available to user that added the plant
 function handleChangeNameClick() {
     if (plant.user_name == getUsername()){
     // Hide the change name button
@@ -171,12 +180,11 @@ async function handleSubmitNameClick() {
     if (newPlantName !== "") { // Check if a new name is provided
         plant.plant_name = newPlantName; // Update the plant object with the new name
         await updatePlant(plant); // Update the plant name in the database
-        console.log('Plant name updated successfully.');
         // Update the plant name displayed on the page
         document.getElementById("plant_name").innerText = newPlantName;
     }
 
-    // Hide the name input container
+    // Hide the name input field
     document.getElementById("name_input").style.display = "none";
     // Show the change name button
     document.getElementById("change_name_button").style.display = "block";
@@ -188,7 +196,7 @@ async function handleSubmitNameClick() {
 document.getElementById("change_name_button").addEventListener("click", handleChangeNameClick);
 document.getElementById("submit_name_button").addEventListener("click", handleSubmitNameClick);
 
-
+//loads page
 async function load_page() {
     const href = window.location.href;
     const elements = href.split("/");

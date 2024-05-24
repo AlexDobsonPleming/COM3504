@@ -1,3 +1,4 @@
+//displays the plant image
 export function createPlantImage(plantData) {
     const plantImage = document.createElement("img");
     plantImage.src = plantData.img;
@@ -7,7 +8,7 @@ export function createPlantImage(plantData) {
 }
 
 
-
+//formats the view of the date and time seen
 export function dateTimeSeenText(date_time) {
     const dateComponent = date_time.toLocaleDateString();
     const timeComponent = date_time.toLocaleTimeString();
@@ -19,7 +20,7 @@ export function dateTimeSeenText(date_time) {
     }
 }
 
-
+//creates map of location shown in plant cards and the individual page
 export function createMapEmbed(plant_location) {
     // Create the div that will wrap the iframe
     const mapContainer = document.createElement("div");

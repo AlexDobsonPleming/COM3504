@@ -1,6 +1,6 @@
 import {getImageAsBase64} from "./form_interactivity_common.mjs";
 
-
+//previews image
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('myImage').addEventListener('change', async function(event) {
         if (event.target.files && event.target.files[0]) {

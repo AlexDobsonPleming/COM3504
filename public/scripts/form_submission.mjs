@@ -2,6 +2,7 @@ import { getImageAsBase64 } from "./form_interactivity_common.mjs";
 import {addPlant} from "./database/client_plants.mjs";
 import {getUsername} from "./username.mjs";
 
+//gets values from the add plant form
 async function submitForm() {
     const imageField = document.getElementById("myImage");
     const file = imageField.files ? imageField.files[0] : undefined;
@@ -56,6 +57,7 @@ async function submitForm() {
     const flowerColourField = document.getElementById("flowerColour");
     const flowerColour = flowerColourField.value;
 
+    //changes colour to rgb
     const hexToRgb = (hex) => {
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {
@@ -66,7 +68,7 @@ async function submitForm() {
     }
     const plantColourRgb = hexToRgb(plantColour);
     const flowerColourRgb = hexToRgb(flowerColour);
-
+    //creates plant using taken values
     const plant = {
         _id: self.crypto.randomUUID(),
         user_name: userName,
@@ -96,6 +98,7 @@ async function submitForm() {
     document.location.href = "/";
 }
 
+//gets users current location
 function setLatLongToCurrent()
 {
     navigator.geolocation.getCurrentPosition(function(position)
@@ -106,13 +109,16 @@ function setLatLongToCurrent()
     });
 }
 
+//gets current date
 function setDateToCurrent() {
     document.getElementById("dateTime").value = new Date(Date.now()).toISOString().split(".")[0].slice(0, -3);
 }
-
+//gets username
 function setUsernameToCurrent() {
     document.getElementById("userName").value = getUsername();
 }
+
+//sets the default displayed values to the current ones
 function setDefaultValues() {
     setLatLongToCurrent();
     setDateToCurrent();
@@ -121,5 +127,6 @@ function setDefaultValues() {
 
 document.addEventListener('DOMContentLoaded', setDefaultValues);
 
+//button to submit add plant form
 const addPlantButton = document.getElementById("addPlantButton");
 addPlantButton.onclick = async (_) => {await submitForm()};
