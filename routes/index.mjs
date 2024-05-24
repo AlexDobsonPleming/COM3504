@@ -18,10 +18,11 @@ router.get('/chat', async function(req, res) {
     const plantId = req.query.plant_id;  // Get plant ID from query parameter
     try {
         const comments = await PlantService.getComments(plantId);
-        res.render('chat', { title: 'Chat', comments: comments, plantId: plantId });
+        const plant = await Plant.findById(plantId);  // Ensure Plant model is imported
+        res.render('chat', { title: plant.plant_name, comments: comments, plantId: plantId });
     } catch (error) {
         console.error('Error retrieving comments:', error);
-        res.render('chat', { title: 'Chat', comments: [], plantId: plantId });
+        res.render('chat', { title: plant.plant_name, comments: [], plantId: plantId });
     }
 });
 

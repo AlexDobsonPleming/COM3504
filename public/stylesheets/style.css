@@ -43,21 +43,10 @@ button {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds a shadow effect */
 }
 button:hover {
-    background-color: #8A9B6E; /* Darker shade for hover state */
+    background-color: #5b6447; /* Darker shade for hover state */
     box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
 }
 
-nav input {
-    width: 80px;
-}
-
-nav button {
-    padding: 0rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    width: fit-content;
-    min-width: 0rem;
-}
 /*HEADER STYLE*/
 header {
     background: #3F4808;
@@ -66,6 +55,7 @@ nav{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     color: #FFFFF0;
     width: 75%;
     margin: auto;
@@ -76,6 +66,7 @@ nav ul {
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    align-items: center;
 }
 nav .logo h1{
     padding: 0;
@@ -85,6 +76,34 @@ nav .navigation{
     display: flex;
     align-items: center;
 }
+
+nav .username{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+nav input{
+    display: flex;
+    padding: 10px; /* Some padding inside */
+    border: 1px solid #ccc; /* A light border */
+    border-radius: 10px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in the width */
+    background-color: #FFFFF0;
+    flex:1;
+}
+
+nav button{
+    background-color: #5b6447; /* Example green background color */
+    flex:0;
+}
+
+nav button:hover {
+    background-color: #4d570a; /* Darker shade for hover state */
+}
+
 /*FOOTER STYLE*/
 footer {
     display: flex;
@@ -138,6 +157,16 @@ section {
     flex: 2; /* Adjust as necessary for your layout */
     padding: 20px; /* Spacing around the text */
 }
+
+.text-article ul{
+    list-style: disc;
+    margin-left: 3rem;
+}
+
+.text-article .note {
+    font-style: italic;
+}
+
 .image-article img {
     display: flex;
     width: 100%; /* Make sure the image is not bigger than its container */
@@ -232,6 +261,8 @@ section {
 .plant-info{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 .info-section {
     display: flex;
@@ -249,8 +280,8 @@ section {
 .info-block {
     display: flex;
     flex-direction: column;
-    padding: 15px;
-    gap: 5px;
+    padding: 2rem;
+    gap: 1rem;
     box-sizing: border-box;
     background: #8A9B6E;
     border-radius: 20px; /* Rounded corners */
@@ -258,19 +289,67 @@ section {
     width: 49%;
     margin-bottom: 2rem;
 }
+
+.info-block p{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/*Style for plant page when editing name*/
+.name-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.name-input input{
+    padding: 10px; /* Some padding inside */
+    border: 1px solid #ccc; /* A light border */
+    border-radius: 10px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in the width */
+    background-color: #FFFFF0;
+    flex: 1;
+}
+
 /* Style for the chat-section */
 .chat-section {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
     background: #8A9B6E;
     border-radius: 20px; /* Rounded corners */
     color: #FFFFF0;
-    margin-top: 0;
-    height: 200px;
+    padding: 2rem;
+    box-sizing: border-box;
 }
 .chat-section h1 {
     margin: 10px;
 }
+
+.initial-form, .chat-interface {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#chat_input {
+    flex: 1;
+}
+
+#username, #chat_input {
+    padding: 10px; /* Some padding inside */
+    border: 1px solid #ccc; /* A light border */
+    border-radius: 10px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in the width */
+    background-color: #FFFFF0;
+}
+
 /*Add plant form*/
 
 form{
@@ -396,7 +475,7 @@ textarea, .details-section input, .location-section input, .characteristics-sect
 /*select menus*/
 
 /* Style the select element with similar properties as the input fields */
-.details-section select, .characteristics-section select {
+.details-section select, .characteristics-section select, .text-article select {
     width: 100%; /* Full width */
     padding: 10px; /* Some padding inside */
     border: 1px solid #ccc; /* A light border */

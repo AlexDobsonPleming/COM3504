@@ -1,13 +1,14 @@
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="/scripts/index.js"></script>
 <body onload="init()">
-    <div class="wrapper">
-        <header>
-            <% include partials/header.ejs %>
-        </header>
+<div class="wrapper">
+    <header>
+        <% include partials/header.ejs %>
+    </header>
 
-        <main>
-            <h1><%= title %></h1>
+    <main>
+        <section class="chat-section">
+            <h1>Chat for <%= title %></h1>
             <div id="history" class="boxed">
                 <% comments.forEach(function(comment) { %>
                     <p><strong><%= comment.name %>:</strong> <%= comment.message %></p>
@@ -15,10 +16,9 @@
             </div>
             <div id="initial_form" style="display: block">
                 <p>Please enter your username to join the chat</p>
-                <form onsubmit="return false;">
-                    <p><label for="username">Your name:</label>
-                        <input type="text" id="username" name="username">
-                    </p>
+                <form onsubmit="return false;" class="initial-form">
+                    <label for="username">Your name:</label>
+                    <input type="text" id="username" name="username">
                     <button id="connect" onclick="connectToRoom()">Connect</button>
                 </form>
             </div>
@@ -28,48 +28,46 @@
                 </div>
                 <div id="history" class="boxed"></div>
                 <div id="input" class="bottom boxed">
-                    <form onsubmit="return false;" style="width: 100%">
-                        <p>
-                            <label for="name"> chat: </label>
-                            <input type="text" id="chat_input" name="chat_input" style="width: 80%">
-                            <button id="chat_send" onclick="sendChatText()">Send</button>
-                        </p>
+                    <form onsubmit="return false;" class="chat-interface">
+                        <label for="name"> chat: </label>
+                        <input type="text" id="chat_input" name="chat_input">
+                        <button id="chat_send" onclick="sendChatText()">Send</button>
                     </form>
                 </div>
             </div>
-        </main>
+        </section>
+    </main>
 
-        <footer>
-            <% include partials/footer.ejs %>
-        </footer>
-    </div>
-    <script>
-        const usernameKey = "username";
+    <footer>
+        <% include partials/footer.ejs %>
+    </footer>
+</div>
+<script>
+    const usernameKey = "username";
 
-        function getUsername() {
-            return localStorage.getItem(usernameKey);
+    function getUsername() {
+        return localStorage.getItem(usernameKey);
+    }
+
+    function fillUsernameField() {
+        const usernameField = document.getElementById("username"); // Ensure this matches your form's username input ID
+        if (usernameField) {
+            usernameField.value = getUsername();
         }
+    }
 
-        function fillUsernameField() {
-            const usernameField = document.getElementById("username"); // Ensure this matches your form's username input ID
-            if (usernameField) {
-                usernameField.value = getUsername();
-            }
+    function setUsernameButtonClicked() {
+        const usernameField = document.getElementById("username"); // This ID should match the username input field
+        const usernameToSet = usernameField.value;
+        localStorage.setItem(usernameKey, usernameToSet);
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        fillUsernameField();
+        const connectButton = document.getElementById("connect"); // Assuming you want to set username upon clicking connect
+        if (connectButton) {
+            connectButton.addEventListener("click", setUsernameButtonClicked);
         }
-
-        function setUsernameButtonClicked() {
-            const usernameField = document.getElementById("username"); // This ID should match the username input field
-            const usernameToSet = usernameField.value;
-            localStorage.setItem(usernameKey, usernameToSet);
-        }
-
-        document.addEventListener("DOMContentLoaded", function(event) {
-            fillUsernameField();
-            const connectButton = document.getElementById("connect"); // Assuming you want to set username upon clicking connect
-            if (connectButton) {
-                connectButton.addEventListener("click", setUsernameButtonClicked);
-            }
-        });
-    </script>
+    });
+</script>
 </body>
-
