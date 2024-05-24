@@ -43,7 +43,7 @@ button {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds a shadow effect */
 }
 button:hover {
-    background-color: #8A9B6E; /* Darker shade for hover state */
+    background-color: #5b6447; /* Darker shade for hover state */
     box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
 }
 
@@ -262,14 +262,38 @@ section {
 .chat-section {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
     background: #8A9B6E;
     border-radius: 20px; /* Rounded corners */
     color: #FFFFF0;
-    margin-top: 0;
+    padding: 2rem;
 }
 .chat-section h1 {
     margin: 10px;
 }
+
+.initial-form, .chat-interface {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#chat_input {
+    flex: 1;
+}
+
+#username, #chat_input {
+    padding: 10px; /* Some padding inside */
+    border: 1px solid #ccc; /* A light border */
+    border-radius: 10px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in the width */
+    background-color: #FFFFF0;
+}
+
 /*Add plant form*/
 
 form{

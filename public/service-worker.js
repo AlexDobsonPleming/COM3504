@@ -18,7 +18,6 @@ const precacheResources = [
     "/scripts/list_plants.mjs",
     "/scripts/search.mjs",
     "/stylesheets/style.css",
-    "/stylesheets/style2.css",
     "/images/background.jpg",
     "/images/cactus.jpeg",
     "/images/favicon.png",
