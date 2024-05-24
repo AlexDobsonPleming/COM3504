@@ -146,6 +146,8 @@ async function identificationStatusChanged() {
             time_updated: Date.now()
         }
         await updatePlant(plant);
+    } else {
+        alert("You can't change the status of a plant you did not add")
     }
 }
 
@@ -156,7 +158,10 @@ function handleChangeNameClick() {
         document.getElementById("change_name_button").style.display = "none";
     // Show the name input container
         document.getElementById("name_input").style.display = "block";
-}}
+    } else {
+        alert("You can't edit a plant you did not add")
+    }
+}
 
 // Function to handle the submit name button click event
 async function handleSubmitNameClick() {
