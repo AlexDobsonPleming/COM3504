@@ -1,10 +1,33 @@
 import { io } from "https://www.unpkg.com/socket.io@4.7.5/client-dist/socket.io.esm.min.js";
 import {getUsername, setUsername} from "./username.mjs";
-import {getPlant} from "./database/client_plants.mjs";
+import {getPlant, updatePlant} from "./database/client_plants.mjs";
+import {synchronise_all, synchronise_one} from "./database/synchronisation.mjs";
+import {getPlantIdFromHref} from "./fill_out_plant_page.mjs";
 
 let username = null;
-const roomNo = new URLSearchParams(window.location.search).get('plant_id');  // This fetches the plant ID from the URL
+const roomNo = getPlantIdFromHref();  // This fetches the plant ID from the URL
 const socket = io();
+
+socket.on('connect', function() {
+    console.log("Connected to WS server");
+
+    console.log(socket.connected);
+});
+socket.on('error', (error) => {
+    console.log("error");
+});
+socket.on('reconnect', (reconnect) => {
+    console.log("reconnect");
+});
+socket.on('reconnect_attempt', (reconnect_attempt) => {
+    console.log("reconnect");
+});
+socket.on('reconnect_error', (reconnect_error) => {
+    console.log("reconnect_error");
+});
+socket.on('reconnect_failed', () => {
+    console.log("reconnect_failed");
+});
 
 let plant = null;
 
@@ -41,11 +64,10 @@ function writeMessage(who, message) {
 }
 
 async function loadHistory() {
-    const href = window.location.href;
-    const elements = href.split("/");
-    const plant_id = elements[elements.length - 1];
 
-    plant = await getPlant(plant_id);
+    plant = await getPlant(getPlantIdFromHref());
+
+    await synchronise_all();
 
     plant.comments.forEach(comment => writeMessage(comment.name, comment.message))
 }
@@ -60,23 +82,21 @@ function sendChatText() {
     socket.emit('chat', roomNo, username, chatText);
 }
  */
-function sendChatText() {
+async function sendChatText() {
     let chatText = document.getElementById('chat_input').value;
     let message = { name: username, message: chatText };
 
-    fetch(`/chat?plant_id=${roomNo}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(message)
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Message saved:', data);
-            socket.emit('chat', roomNo, username, chatText);
-        })
-        .catch(error => console.error('Error sending message:', error));
+    plant.comments.push({
+        name: username,
+        message: chatText,
+        date_time_sent: Date.now()
+    });
+
+    socket.emit('chat', roomNo, username, chatText);
+
+    await updatePlant(plant);
+    await synchronise_one(plant);
+
 }
 
 
@@ -85,6 +105,7 @@ function sendChatText() {
  * interface
  */
 function connectToRoom() {
+    console.log(socket.connected);
     username = document.getElementById('username').value;
     if (!username) username = 'Unknown-' + Math.random();
     socket.emit('create or join', roomNo, username);
@@ -135,9 +156,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 });
 
+function inputChange() {
+    if (document.getElementById("username").value.length > 0) {
+        document.getElementById("connect").disabled = false;
+        document.getElementById("username").disabled = false;
+    }
+    document.getElementById("connect").disabled = true;
+    document.getElementById("username").disabled = true;
+
+}
+
 await loadHistory();
 
 document.getElementById("connect").addEventListener("click", connectToRoom);
 document.getElementById("chat_send").addEventListener("click", sendChatText);
+document.getElementById("username").addEventListener("change", inputChange);
 init();
 

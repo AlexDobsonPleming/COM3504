@@ -1,9 +1,10 @@
 import {addPlant, getPlants, removePlant} from "./client_plants.mjs";
-import {getPlantsFromAPI} from "../API/plants.mjs";
+import {getPlantFromAPI, getPlantsFromAPI} from "../API/plants.mjs";
 
 function comparePlantsForPatch(plantA, plantB) {
     return (plantA._id.valueOf() === plantB._id.valueOf()) &&
-        (plantA.identify_status.status.valueOf()  === plantB.identify_status.status.valueOf());
+        (plantA.identify_status.status.valueOf()  === plantB.identify_status.status.valueOf()) &&
+        (plantA.comments.length === plantB.comments.length);
 }
 
 function comparePlantsForSync(plantA, plantB) {
@@ -30,35 +31,50 @@ export async function synchronise_all() {
     }
 }
 
+export async function synchronise_one(clientPlant) {
+    const remotePlant = await getPlantFromAPI(clientPlant._id);
+
+    if (comparePlantsForPatch(clientPlant, remotePlant))
+    {
+        await uploadPlantForSync(clientPlant);
+    }
+}
+
+async function uploadPlantForSync(plant) {
+    const plantUploadEndpoint = "/API/plant";
+
+    // try {
+    const response = await fetch(plantUploadEndpoint, {
+        method: "POST",
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        body: JSON.stringify(plant)
+    });
+
+    if (response.status >= 400 && response.status < 600) {
+        return {
+            plant: plant,
+            uploadSuccessful: false
+        };
+    }
+
+    const success = ({
+        plant: plant,
+        uploadSuccessful: true
+    });
+    return success;
+    // } catch (error) {
+    //     return {
+    //         plant: plant,
+    //         uploadSuccessful: false
+    //     };
+    // }
+}
+
 async function uploadPlantsForSync(plants) {
 
-    const plantUploadEndpoint = "/API/plant";
+
     const plantsAndUploadStatus = plants.map(async plant => {
-        // try {
-        const response = await fetch(plantUploadEndpoint, {
-            method: "POST",
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-            body: JSON.stringify(plant)
-        });
-
-        if (response.status >= 400 && response.status < 600) {
-            return {
-                plant: plant,
-                uploadSuccessful: false
-            };
-        }
-
-        const success = ({
-            plant: plant,
-            uploadSuccessful: true
-        });
-        return success;
-        // } catch (error) {
-        //     return {
-        //         plant: plant,
-        //         uploadSuccessful: false
-        //     };
-        // }
+        return await uploadPlantForSync(plant);
     });
 
 

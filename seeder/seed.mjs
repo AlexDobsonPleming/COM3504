@@ -112,7 +112,7 @@ const plants = [
     }),]
 //clear old db
 let existing_plants = await Plant.find({});
-existing_plants.map(async p => Plant.deleteOne({plant_name: p.plant_name}));
+existing_plants.map(async p => Plant.deleteOne({plant_name: p._id}));
 
 
 //save your data. this is an async operation

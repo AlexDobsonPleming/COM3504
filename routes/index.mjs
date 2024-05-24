@@ -2,7 +2,7 @@ import express from "express";
 var router = express.Router();
 import plants from "../models/plants.mjs";
 import multer from "multer";
-import {create_or_update, get_all as get_plants} from "../services/plants.js";
+import {create_or_update, get_all as get_plants, get_one } from "../services/plants.js";
 import Plant from "../models/plants.mjs";
 import * as PlantService from "../services/plants.js";
 
@@ -13,18 +13,6 @@ router.get('/', function(req, res, next) {
     res.render('home', { title: 'Home Page' });
 });
 
-// GET route to retrieve comments for a specific plant using query parameter
-router.get('/chat', async function(req, res) {
-    const plantId = req.query.plant_id;  // Get plant ID from query parameter
-    try {
-        const comments = await PlantService.getComments(plantId);
-        const plant = await Plant.findById(plantId);  // Ensure Plant model is imported
-        res.render('chat', { title: plant.plant_name, comments: comments, plantId: plantId });
-    } catch (error) {
-        console.error('Error retrieving comments:', error);
-        res.render('chat', { title: plant.plant_name, comments: [], plantId: plantId });
-    }
-});
 
 // POST route to add a comment to a specific plant using query parameter
 router.post('/chat', async function(req, res) {
@@ -66,7 +54,11 @@ router.post('/API/plant', upload.single('myImg'), async function (req, res, next
 });
 
 
-
+router.get('/API/plant/:plant_id', async function(req, res) {
+    const plantId = req.params.plant_id;
+    const plant = await get_one(plantId);
+    res.send(plant);
+});
 
 router.get('/API/plants', async function(req, res) {
   const plants = await get_plants();

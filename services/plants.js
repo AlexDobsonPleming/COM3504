@@ -5,6 +5,11 @@ export async function get_all() {
     return existing_plants;
 }
 
+export async function get_one(id) {
+    let plant = await Plant.find({ _id: id });
+    return plant;
+}
+
 export async function create_or_update(plant) {
     let {
         _id,

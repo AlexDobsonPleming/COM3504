@@ -188,13 +188,18 @@ async function handleSubmitNameClick() {
 document.getElementById("change_name_button").addEventListener("click", handleChangeNameClick);
 document.getElementById("submit_name_button").addEventListener("click", handleSubmitNameClick);
 
-
-async function load_page() {
+export function getPlantIdFromHref() {
     const href = window.location.href;
     const elements = href.split("/");
     const plant_id = elements[elements.length - 1];
 
-    plant = await getPlant(plant_id);
+    return plant_id;
+}
+
+async function load_page() {
+
+
+    plant = await getPlant(getPlantIdFromHref());
 
     setValuesOnPlantPage(plant);
 }

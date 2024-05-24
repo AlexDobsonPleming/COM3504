@@ -4,7 +4,7 @@ const cacheName = 'cache-v1';
 const precacheResources = [
     "/",
     "/add",
-    // "/plant",
+    "/plant",
     "/scripts/database/database.mjs",
     "/scripts/database/client_plants.mjs",
     "/scripts/database/synchronisation.mjs",
