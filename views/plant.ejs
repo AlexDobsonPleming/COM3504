@@ -10,10 +10,14 @@
             <section class="welcome-section">
                 <article class="image-article">
                     <img id="plant_image" src="/images/cactus.jpeg" alt="Plant Profile Image">
-                    <button class="top-button">Update status</button>
+                    <button class="top-button" id="change_name_button">Change Name</button>
                 </article>
                 <article class="text-article">
                     <h1 id="plant_name">Plant name</h1>
+                    <div id="name_input" style="display: none;">
+                        <input type="text" id="new_plant_name" placeholder="Enter new plant name">
+                        <button id="submit_name_button">Submit</button>
+                    </div>
                     <select id="identifyStatus" name="identify_status">
                         <option value="Completed">Completed</option>
                         <option value="In-Progress">In-Progress</option>
@@ -54,10 +58,11 @@
     </footer>
 </div>
 
+
 <script>
     function openChat(plantId) {
         window.open(`/chat?plant_id=${plantId}`, '_blank');
     }
-</script>
 
+</script>
 </body>

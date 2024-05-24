@@ -147,6 +147,40 @@ async function identificationStatusChanged() {
     await updatePlant(plant);
 }
 
+// Function to handle the change name button click event
+function handleChangeNameClick() {
+    // Hide the change name button
+    document.getElementById("change_name_button").style.display = "none";
+    // Show the name input container
+    document.getElementById("name_input").style.display = "block";
+}
+
+// Function to handle the submit name button click event
+async function handleSubmitNameClick() {
+    const newPlantNameInput = document.getElementById("new_plant_name");
+    const newPlantName = newPlantNameInput.value;
+
+    if (newPlantName !== "") { // Check if a new name is provided
+        plant.plant_name = newPlantName; // Update the plant object with the new name
+        await updatePlant(plant); // Update the plant name in the database
+        console.log('Plant name updated successfully.');
+        // Update the plant name displayed on the page
+        document.getElementById("plant_name").innerText = newPlantName;
+    }
+
+    // Hide the name input container
+    document.getElementById("name_input").style.display = "none";
+    // Show the change name button
+    document.getElementById("change_name_button").style.display = "block";
+    // Clear the input field
+    newPlantNameInput.value = "";
+}
+
+// Add event listeners to the change name button and submit name button
+document.getElementById("change_name_button").addEventListener("click", handleChangeNameClick);
+document.getElementById("submit_name_button").addEventListener("click", handleSubmitNameClick);
+
+
 async function load_page() {
     const href = window.location.href;
     const elements = href.split("/");
@@ -156,5 +190,4 @@ async function load_page() {
 
     setValuesOnPlantPage(plant);
 }
-
 window.onload = load_page;
