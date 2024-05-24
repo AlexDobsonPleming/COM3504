@@ -137,23 +137,26 @@ function rgbToHex(colour) {
 }
 
 async function identificationStatusChanged() {
-    const identification_status_dropdown = document.getElementById("identifyStatus");
-    const identification_status = identification_status_dropdown.value;
+    if (plant.user_name == getUsername()) {
+        const identification_status_dropdown = document.getElementById("identifyStatus");
+        const identification_status = identification_status_dropdown.value;
 
-    plant.identify_status = {
-        status: identification_status,
-        time_updated: Date.now()
+        plant.identify_status = {
+            status: identification_status,
+            time_updated: Date.now()
+        }
+        await updatePlant(plant);
     }
-    await updatePlant(plant);
 }
 
 // Function to handle the change name button click event
 function handleChangeNameClick() {
+    if (plant.user_name == getUsername()){
     // Hide the change name button
-    document.getElementById("change_name_button").style.display = "none";
+        document.getElementById("change_name_button").style.display = "none";
     // Show the name input container
-    document.getElementById("name_input").style.display = "block";
-}
+        document.getElementById("name_input").style.display = "block";
+}}
 
 // Function to handle the submit name button click event
 async function handleSubmitNameClick() {
