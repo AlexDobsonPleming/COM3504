@@ -249,8 +249,8 @@ section {
 .info-block {
     display: flex;
     flex-direction: column;
-    padding: 15px;
-    gap: 5px;
+    padding: 2rem;
+    gap: 1rem;
     box-sizing: border-box;
     background: #8A9B6E;
     border-radius: 20px; /* Rounded corners */
@@ -258,6 +258,31 @@ section {
     width: 49%;
     margin-bottom: 2rem;
 }
+
+.info-block p{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/*Style for plant page when editing name*/
+.name-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.name-input input{
+    padding: 10px; /* Some padding inside */
+    border: 1px solid #ccc; /* A light border */
+    border-radius: 10px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in the width */
+    background-color: #FFFFF0;
+    flex: 1;
+}
+
+
 /* Style for the chat-section */
 .chat-section {
     display: flex;
@@ -269,6 +294,7 @@ section {
     color: #FFFFF0;
     padding: 2rem;
     box-sizing: border-box;
+    margin-top: 0;
 }
 .chat-section h1 {
     margin: 10px;
@@ -421,7 +447,7 @@ textarea, .details-section input, .location-section input, .characteristics-sect
 /*select menus*/
 
 /* Style the select element with similar properties as the input fields */
-.details-section select, .characteristics-section select {
+.details-section select, .characteristics-section select, .text-article select  {
     width: 100%; /* Full width */
     padding: 10px; /* Some padding inside */
     border: 1px solid #ccc; /* A light border */
@@ -532,6 +558,9 @@ input[type="color"]::-webkit-color-swatch {
 .label-input-container label {
     white-space: nowrap; /* Keeps the label on one line */
 }
+
+
+
 
 
 /*map styling*/

@@ -15,8 +15,10 @@
                     <article class="text-article">
                         <h1 id="plant_name">Plant name</h1>
                         <div id="name_input" style="display: none;">
-                            <input type="text" id="new_plant_name" placeholder="Enter new plant name">
-                            <button id="submit_name_button">Submit</button>
+                            <div class="name-input">
+                                <input type="text" id="new_plant_name" placeholder="Enter new plant name">
+                                <button id="submit_name_button">Submit</button>
+                            </div>
                         </div>
                         <select id="identifyStatus" name="identify_status">
                             <option value="Completed">Completed</option>
@@ -37,8 +39,8 @@
                         <div id="map" class="map"></div>
                     </div>
                     <div class="info-block">
-                        <p id="width">Width:</p>
-                        <p id="height">Height:</p>
+                        <p id="width">Width</p>
+                        <p id="height">Height</p>
                         <p id="has_flowers">Has flowers:</p>
                         <p id="has_fruit">Has fruit:</p>
                         <p id="has_seeds">Has seeds:</p>
