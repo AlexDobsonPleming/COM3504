@@ -48,7 +48,32 @@
                     </div>
                 </section>
                 <section class="chat-section">
-                    <button onclick="openChat('<%= plant_id %>')">Join the chat</button>
+                    <div id="history" class="boxed">
+                    </div>
+                    <div id="initial_form" style="display: block">
+                        <p>Please enter your username to join the chat</p>
+                        <form onsubmit="return false;">
+                            <p><label for="username">Your name:</label>
+                                <input type="text" id="username" name="username">
+                            </p>
+                            <button id="connect">Connect</button>
+                        </form>
+                    </div>
+                    <div id="chat_interface" style="display: none">
+                        <div>
+                            <div id="who_you_are" style="display: inline"></div>, you are in room: <div id="in_room" style="display: inline"></div>
+                        </div>
+                        <div id="history" class="boxed"></div>
+                        <div id="input" class="bottom boxed">
+                            <form onsubmit="return false;" style="width: 100%">
+                                <p>
+                                    <label for="name"> chat: </label>
+                                    <input type="text" id="chat_input" name="chat_input" style="width: 80%">
+                                    <button id="chat_send">Send</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
                 </section>
             </div>
         </main>
@@ -58,9 +83,5 @@
         </footer>
     </div>
 
-    <script>
-        function openChat(plantId) {
-            window.open(`/chat?plant_id=${plantId}`, '_blank');
-        }
-    </script>
+    <script type="module" src="/scripts/chat.mjs"></script>
 </body>

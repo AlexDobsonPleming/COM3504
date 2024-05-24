@@ -4,7 +4,7 @@ export function getUsername() {
     return localStorage.getItem(usernameKey);
 }
 export function setUsername(username) {
-    localStorage.setItem(usernameKey, usernameToSet);
+    localStorage.setItem(usernameKey, username);
 }
 
 function fillUsernameField() {

@@ -1,9 +1,12 @@
 import { io } from "https://www.unpkg.com/socket.io@4.7.5/client-dist/socket.io.esm.min.js";
 import {getUsername, setUsername} from "./username.mjs";
+import {getPlant} from "./database/client_plants.mjs";
 
 let username = null;
 const roomNo = new URLSearchParams(window.location.search).get('plant_id');  // This fetches the plant ID from the URL
 const socket = io();
+
+let plant = null;
 
 /**
  * called by <body onload>
@@ -29,9 +32,22 @@ function init() {
     socket.on('chat', function (room, userId, chatText) {
         let who = userId
         if (userId === username) who = 'Me';
-        writeOnHistory('<b>' + who + ':</b> ' + chatText);
+        writeMessage(who, chatText)
     });
+}
 
+function writeMessage(who, message) {
+    writeOnHistory('<b>' + who + ':</b> ' + message);
+}
+
+async function loadHistory() {
+    const href = window.location.href;
+    const elements = href.split("/");
+    const plant_id = elements[elements.length - 1];
+
+    plant = await getPlant(plant_id);
+
+    plant.comments.forEach(comment => writeMessage(comment.name, comment.message))
 }
 
 
@@ -119,8 +135,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 });
 
+await loadHistory();
 
 document.getElementById("connect").addEventListener("click", connectToRoom);
-document.getElementById("chat_send").addEventListener("click", connectToRoom);
+document.getElementById("chat_send").addEventListener("click", sendChatText);
 init();
 

@@ -28,8 +28,6 @@ export async function synchronise_all() {
     if (plantsInClientButNotRemote.length > 0) {
         await uploadPlantsForSync(plantsInClientButNotRemote);
     }
-
-
 }
 
 async function uploadPlantsForSync(plants) {
