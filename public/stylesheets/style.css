@@ -47,17 +47,6 @@ button:hover {
     box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Larger shadow for hover state */
 }
 
-nav input {
-    width: 80px;
-}
-
-nav button {
-    padding: 0rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    width: fit-content;
-    min-width: 0rem;
-}
 /*HEADER STYLE*/
 header {
     background: #3F4808;
@@ -66,6 +55,7 @@ nav{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     color: #FFFFF0;
     width: 75%;
     margin: auto;
@@ -76,6 +66,7 @@ nav ul {
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    align-items: center;
 }
 nav .logo h1{
     padding: 0;
@@ -85,6 +76,34 @@ nav .navigation{
     display: flex;
     align-items: center;
 }
+
+nav .username{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+nav input{
+    display: flex;
+    padding: 10px; /* Some padding inside */
+    border: 1px solid #ccc; /* A light border */
+    border-radius: 10px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in the width */
+    background-color: #FFFFF0;
+    flex:1;
+}
+
+nav button{
+    background-color: #5b6447; /* Example green background color */
+    flex:0;
+}
+
+nav button:hover {
+    background-color: #4d570a; /* Darker shade for hover state */
+}
+
 /*FOOTER STYLE*/
 footer {
     display: flex;
@@ -138,6 +157,16 @@ section {
     flex: 2; /* Adjust as necessary for your layout */
     padding: 20px; /* Spacing around the text */
 }
+
+.text-article ul{
+    list-style: disc;
+    margin-left: 3rem;
+}
+
+.text-article .note {
+    font-style: italic;
+}
+
 .image-article img {
     display: flex;
     width: 100%; /* Make sure the image is not bigger than its container */
@@ -228,6 +257,7 @@ section {
     margin: 0;
     padding: 0;
 }
+
 /* Style for the info-section */
 .plant-info{
     display: flex;
