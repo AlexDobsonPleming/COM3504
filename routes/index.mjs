@@ -4,6 +4,7 @@ import plants from "../models/plants.mjs";
 import multer from "multer";
 import {create_or_update, get_all as get_plants} from "../services/plants.js";
 import Plant from "../models/plants.mjs";
+import * as PlantService from "../services/plants.js";
 
 let upload = multer();
 
@@ -12,9 +13,33 @@ router.get('/', function(req, res, next) {
     res.render('home', { title: 'Home Page' });
 });
 
-/* GET home page. */
-router.get('/chat', function(req, res, next) {
-    res.render('chat', { title: 'Chat' });
+// GET route to retrieve comments for a specific plant using query parameter
+router.get('/chat', async function(req, res) {
+    const plantId = req.query.plant_id;  // Get plant ID from query parameter
+    try {
+        const comments = await PlantService.getComments(plantId);
+        res.render('chat', { title: 'Chat', comments: comments, plantId: plantId });
+    } catch (error) {
+        console.error('Error retrieving comments:', error);
+        res.render('chat', { title: 'Chat', comments: [], plantId: plantId });
+    }
+});
+
+// POST route to add a comment to a specific plant using query parameter
+router.post('/chat', async function(req, res) {
+    const plantId = req.query.plant_id; // Get plant ID from query parameter
+    const comment = {
+        name: req.body.name,
+        message: req.body.message,
+        date_time_sent: new Date()
+    };
+    try {
+        const updatedPlant = await PlantService.addComment(plantId, comment);
+        res.json(updatedPlant);
+    } catch (error) {
+        console.error('Error adding comment:', error);
+        res.status(500).json({ message: "Error adding comment", error });
+    }
 });
 
 router.get('/plant/:plant_id', function(req, res, next) {

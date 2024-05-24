@@ -8,6 +8,11 @@
 
         <main>
             <h1><%= title %></h1>
+            <div id="history" class="boxed">
+                <% comments.forEach(function(comment) { %>
+                    <p><strong><%= comment.name %>:</strong> <%= comment.message %></p>
+                <% }); %>
+            </div>
             <div id="initial_form" style="display: block">
                 <p>Please enter your username to join the chat</p>
                 <form onsubmit="return false;">
@@ -38,5 +43,33 @@
             <% include partials/footer.ejs %>
         </footer>
     </div>
+    <script>
+        const usernameKey = "username";
+
+        function getUsername() {
+            return localStorage.getItem(usernameKey);
+        }
+
+        function fillUsernameField() {
+            const usernameField = document.getElementById("username"); // Ensure this matches your form's username input ID
+            if (usernameField) {
+                usernameField.value = getUsername();
+            }
+        }
+
+        function setUsernameButtonClicked() {
+            const usernameField = document.getElementById("username"); // This ID should match the username input field
+            const usernameToSet = usernameField.value;
+            localStorage.setItem(usernameKey, usernameToSet);
+        }
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            fillUsernameField();
+            const connectButton = document.getElementById("connect"); // Assuming you want to set username upon clicking connect
+            if (connectButton) {
+                connectButton.addEventListener("click", setUsernameButtonClicked);
+            }
+        });
+    </script>
 </body>
 

@@ -64,3 +64,18 @@ export async function create_or_update(plant) {
         return doc;
     }
 }
+
+// Function to add a comment to a plant
+export async function addComment(plantId, comment) {
+    const filter = { _id: plantId };
+    const update = {
+        $push: { comments: comment }  // Adds the new comment to the comments array
+    };
+    return Plant.findOneAndUpdate(filter, update, { new: true });
+}
+
+// Function to retrieve comments for a plant
+export async function getComments(plantId) {
+    const plant = await Plant.findById(plantId);
+    return plant ? plant.comments : [];
+}

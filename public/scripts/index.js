@@ -35,11 +35,31 @@ function init() {
 /**
  * called when the Send button is pressed. It gets the text to send from the interface
  * and sends the message via  socket
- */
+
 function sendChatText() {
     let chatText = document.getElementById('chat_input').value;
     socket.emit('chat', roomNo, username, chatText);
 }
+ */
+function sendChatText() {
+    let chatText = document.getElementById('chat_input').value;
+    let message = { name: username, message: chatText };
+
+    fetch(`/chat?plant_id=${roomNo}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Message saved:', data);
+            socket.emit('chat', roomNo, username, chatText);
+        })
+        .catch(error => console.error('Error sending message:', error));
+}
+
 
 /**
  * used to connect to a room. It gets the user name and room number from the
