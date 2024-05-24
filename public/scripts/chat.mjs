@@ -1,6 +1,9 @@
+import { io } from "https://www.unpkg.com/socket.io@4.7.5/client-dist/socket.io.esm.min.js";
+import {getUsername, setUsername} from "./username.mjs";
+
 let username = null;
-let roomNo = new URLSearchParams(window.location.search).get('plant_id');  // This fetches the plant ID from the URL
-let socket = io();
+const roomNo = new URLSearchParams(window.location.search).get('plant_id');  // This fetches the plant ID from the URL
+const socket = io();
 
 /**
  * called by <body onload>
@@ -73,7 +76,7 @@ function connectToRoom() {
 
 /**
  * it appends the given html text to the history div
- * @param text: teh text to append
+ * @param text: the text to append
  */
 function writeOnHistory(text) {
     let history = document.getElementById('history');
@@ -94,3 +97,30 @@ function hideLoginInterface(room, userId) {
     document.getElementById('who_you_are').innerHTML= userId;
     document.getElementById('in_room').innerHTML= ' '+room;
 }
+
+function fillUsernameField() {
+    const usernameField = document.getElementById("username"); // Ensure this matches your form's username input ID
+    if (usernameField) {
+        usernameField.value = getUsername();
+    }
+}
+
+function setUsernameButtonClicked() {
+    const usernameField = document.getElementById("username"); // This ID should match the username input field
+    const usernameToSet = usernameField.value;
+    setUsername(usernameToSet);
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    fillUsernameField();
+    const connectButton = document.getElementById("connect"); // Assuming you want to set username upon clicking connect
+    if (connectButton) {
+        connectButton.addEventListener("click", setUsernameButtonClicked);
+    }
+});
+
+
+document.getElementById("connect").addEventListener("click", connectToRoom);
+document.getElementById("chat_send").addEventListener("click", connectToRoom);
+init();
+

@@ -14,7 +14,7 @@ const precacheResources = [
     "/scripts/form_interactivity_common.mjs",
     "/scripts/form_submission.mjs",
     "/scripts/image_preview.mjs",
-    "/scripts/chat.js",
+    "/scripts/chat.mjs",
     "/scripts/list_plants.mjs",
     "/scripts/search.mjs",
     "/stylesheets/style.css",
