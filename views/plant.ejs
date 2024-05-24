@@ -48,14 +48,14 @@
                     </div>
                 </section>
                 <section class="chat-section">
+                    <h1>Chat</h1>
                     <div id="history" class="boxed">
                     </div>
                     <div id="initial_form" style="display: block">
                         <p>Please enter your username to join the chat</p>
-                        <form onsubmit="return false;">
-                            <p><label for="username">Your name:</label>
-                                <input type="text" id="username" name="username">
-                            </p>
+                        <form onsubmit="return false;" class="initial-form">
+                            <label for="username">Your name:</label>
+                            <input type="text" id="username" name="username">
                             <button id="connect">Connect</button>
                         </form>
                     </div>
@@ -65,12 +65,10 @@
                         </div>
                         <div id="history" class="boxed"></div>
                         <div id="input" class="bottom boxed">
-                            <form onsubmit="return false;" style="width: 100%">
-                                <p>
-                                    <label for="name"> chat: </label>
-                                    <input type="text" id="chat_input" name="chat_input" style="width: 80%">
-                                    <button id="chat_send">Send</button>
-                                </p>
+                            <form onsubmit="return false;" class="chat-interface">
+                                <label for="name"> chat: </label>
+                                <input type="text" id="chat_input" name="chat_input">
+                                <button id="chat_send">Send</button>
                             </form>
                         </div>
                     </div>

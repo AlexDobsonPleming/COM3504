@@ -268,9 +268,11 @@ section {
     border-radius: 20px; /* Rounded corners */
     color: #FFFFF0;
     padding: 2rem;
+    box-sizing: border-box;
 }
 .chat-section h1 {
     margin: 10px;
+    align-self: center;
 }
 
 .initial-form, .chat-interface {
