@@ -50,7 +50,11 @@
                     </div>
                 </section>
 
-                <button onclick="openChat('<%= plant_id %>')" class="join-chat">Join the chat</button>
+                <% if (typeof plant_id !== 'undefined' && plant_id) { %>
+                    <button onclick="openChat('<%= plant_id %>')" class="join-chat">Join the chat</button>
+                <% } else { %>
+                    <p>Chat functionality not available.</p>
+                <% } %>
 
             </div>
         </main>
@@ -61,7 +65,7 @@
     </div>
 
     <script>
-        //opens the chat of the plant being viewed
+        // Opens the chat of the plant being viewed
         function openChat(plantId) {
             window.open(`/chat?plant_id=${plantId}`, '_blank');
         }

@@ -14,7 +14,7 @@ const precacheResources = [
     "/scripts/form_interactivity_common.mjs",
     "/scripts/form_submission.mjs",
     "/scripts/image_preview.mjs",
-    "/scripts/chat.js",
+    "/scripts/index.js",
     "/scripts/list_plants.mjs",
     "/scripts/search.mjs",
     "/stylesheets/style.css",
@@ -35,24 +35,30 @@ self.addEventListener('install', (event) => {
     event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(precacheResources)));
 });
 
-self.addEventListener('activate', (event) => {
-    console.log('Service worker activate event!');
+self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then(keyList => {
-            return Promise.all(keyList.map(key => {
+        caches.keys().then(keys => Promise.all(
+            keys.map(key => {
                 if (key !== cacheName) {
                     return caches.delete(key);
                 }
-            }));
+            })
+        )).then(() => {
+            console.log('New service worker now ready to handle fetches!');
+            return self.clients.claim();
         })
     );
-    return self.clients.claim();
 });
 
 // When there's an incoming fetch request, try and respond with a precached resource, otherwise fall back to the network
 self.addEventListener('fetch', (event) => {
     // Bypass cache for Socket.io requests
     if (event.request.url.includes('socket.io')) {
+        return fetch(event.request);
+    }
+
+    // Bypass cache for POST requests or socket.io requests
+    if (event.request.method === "POST" || event.request.url.includes('socket.io')) {
         return fetch(event.request);
     }
 

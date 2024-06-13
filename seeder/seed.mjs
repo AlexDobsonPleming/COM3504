@@ -5,7 +5,7 @@ import {mongoose} from "../databases/plants.mjs";
 //create your array. i inserted only 1 object here
 const plants = [
     new Plant({
-        _id: "1",
+        _id: crypto.randomUUID(),
         user_name: "hipper",
         plant_name: "Taraxacum_officinale",
         identify_status: { status: "Completed", time_updated: new Date(2007, 2, 15) },
